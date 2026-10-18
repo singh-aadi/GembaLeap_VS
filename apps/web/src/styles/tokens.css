@@ -1,0 +1,53 @@
+/* Design tokens. Light is the default: the app is used in bright factories. */
+:root {
+  --gl-navy: #0b1f3a;
+  --gl-heading: #0b1f3a;
+  --gl-ink: #202124;
+  --gl-muted: #5f6368;
+  --gl-surface: #ffffff;
+  --gl-subtle: #f1f3f4;
+  --gl-line: #dadce0;
+  --gl-accent: #1a73e8;
+  --gl-on-accent: #ffffff;
+  --gl-accent-soft: #e8f0fe;
+  --gl-teal: #0e9f8e;
+  --gl-teal-soft: #e7f6f4;
+  --gl-good: #1e8e3e;
+  --gl-good-soft: #e6f4ea;
+  --gl-warn: #f9ab00;
+  --gl-warn-ink: #b06000;
+  --gl-warn-soft: #fef7e0;
+  --gl-bad: #d93025;
+  --gl-bad-soft: #fce8e6;
+  --gl-on-navy: #ffffff;
+  --gl-on-navy-muted: #a8b6cc;
+  --gl-font-sans:
+    system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', 'Noto Sans JP',
+    'Noto Sans Devanagari', 'Noto Sans Tamil', sans-serif;
+  --gl-font-mono: ui-monospace, 'SF Mono', 'Roboto Mono', Menlo, Consolas, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --gl-navy: #0a1626;
+    --gl-heading: #e8eaed;
+    --gl-ink: #e8eaed;
+    --gl-muted: #9aa0a6;
+    --gl-surface: #1e2227;
+    --gl-subtle: #15181c;
+    --gl-line: #3c4043;
+    --gl-accent: #8ab4f8;
+    --gl-on-accent: #0b1f3a;
+    --gl-accent-soft: #1f2d44;
+    --gl-teal: #4fd1bf;
+    --gl-teal-soft: #15302d;
+    --gl-good: #81c995;
+    --gl-good-soft: #1b3324;
+    --gl-warn: #fdd663;
+    --gl-warn-ink: #fdd663;
+    --gl-warn-soft: #3a3218;
+    --gl-bad: #f28b82;
+    --gl-bad-soft: #3c1f1e;
+    --gl-on-navy-muted: #9aa8bd;
+  }
+}

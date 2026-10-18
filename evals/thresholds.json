@@ -1,0 +1,8 @@
+{
+  "capture_code_accuracy": { "set": "golden/capture.jsonl", "metric": "exact_match", "min": 0.85 },
+  "translation_fidelity": { "set": "golden/translation.jsonl", "metric": "safety_meaning_losses", "max": 0 },
+  "score_agreement": { "set": "golden/maturity.jsonl", "metric": "within_one_level", "min": 0.9 },
+  "eight_d_quality": { "set": "golden/eight_d.jsonl", "metric": "mean_reviewer_score", "min": 4.0 },
+  "report_citations": { "set": "golden/reports.jsonl", "metric": "claims_with_valid_evidence", "min": 1.0 },
+  "passport_recall": { "set": "generated", "metric": "errors_flagged", "min": 1.0, "max_false_warning_rate": 0.1 }
+}
