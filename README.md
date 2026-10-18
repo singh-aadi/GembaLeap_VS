@@ -90,3 +90,5 @@ services/agents/gembaleap_agents/
 - AI output is marked as a draft and links its evidence until a named person approves it.
 - Rankings, rule checks and hashes are computed in code. Models read, structure and draft.
 - Demo data is synthetic. No real company data.
+
+Hosting in vercel
