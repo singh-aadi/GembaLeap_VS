@@ -1,0 +1,56 @@
+[
+  {
+    "id": "Hole pitch drifts out of tolerance",
+    "factor": "equipment_failure",
+    "lossMinutes30d": 212,
+    "recurrence": 6,
+    "effort": 2,
+    "priority": 617.3,
+    "rank": 1
+  },
+  {
+    "id": "Die change takes 38–45 min against a 25 min standard",
+    "factor": "operations",
+    "lossMinutes30d": 310,
+    "recurrence": 8,
+    "effort": 4,
+    "priority": 544.1,
+    "rank": 2
+  },
+  {
+    "id": "Coils arrive without mill certificates",
+    "factor": "material_unavailability",
+    "lossMinutes30d": 95,
+    "recurrence": 3,
+    "effort": 1,
+    "priority": 308.2,
+    "rank": 3
+  },
+  {
+    "id": "Coil feed jams at the straightener",
+    "factor": "material_flow",
+    "lossMinutes30d": 64,
+    "recurrence": 5,
+    "effort": 3,
+    "priority": 106.8,
+    "rank": 4
+  },
+  {
+    "id": "Problems not passed on at shift handover",
+    "factor": "communication",
+    "lossMinutes30d": 30,
+    "recurrence": 4,
+    "effort": 2,
+    "priority": 60.2,
+    "rank": 5
+  },
+  {
+    "id": "Weld nugget undersize after long runs",
+    "factor": "equipment_failure",
+    "lossMinutes30d": 41,
+    "recurrence": 2,
+    "effort": 2,
+    "priority": 51.2,
+    "rank": 6
+  }
+]

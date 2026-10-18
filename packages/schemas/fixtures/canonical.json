@@ -1,0 +1,16 @@
+{
+  "input": {
+    "tenantId": "01JA0000000000000000000001",
+    "action": "passport.seal",
+    "seq": 7,
+    "detail": {
+      "lotNo": "SCV-2410-118",
+      "checks": ["heat_match", "hydro_test"],
+      "note": "Nhiệt độ ổn định · 熱番号一致"
+    },
+    "ok": true,
+    "value": null
+  },
+  "canonical": "{\"action\":\"passport.seal\",\"detail\":{\"checks\":[\"heat_match\",\"hydro_test\"],\"lotNo\":\"SCV-2410-118\",\"note\":\"Nhiệt độ ổn định · 熱番号一致\"},\"ok\":true,\"seq\":7,\"tenantId\":\"01JA0000000000000000000001\",\"value\":null}",
+  "sha256": "ad5efb85b1caffb1f30360f3aef636e66a95f519c592dd966d9b3c17315f3bf1"
+}
