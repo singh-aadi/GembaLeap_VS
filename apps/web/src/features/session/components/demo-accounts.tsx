@@ -29,6 +29,7 @@ export function DemoAccounts() {
   const groups = [
     { side: 'supplier' as const, label: t('login.demo.suppliers') },
     { side: 'buyer' as const, label: t('login.demo.buyers') },
+    { side: 'sutra' as const, label: t('login.demo.coach') },
   ]
 
   return (
@@ -51,7 +52,15 @@ export function DemoAccounts() {
                     <div className="min-w-0 flex-1">
                       <p className="flex flex-wrap items-center gap-2 text-sm font-medium text-ink">
                         {account.name}
-                        <Badge tone={group.side === 'supplier' ? 'teal' : 'accent'}>
+                        <Badge
+                          tone={
+                            group.side === 'supplier'
+                              ? 'teal'
+                              : group.side === 'buyer'
+                                ? 'accent'
+                                : 'warn'
+                          }
+                        >
                           {t(`role.${account.role}`)}
                         </Badge>
                       </p>

@@ -1,11 +1,11 @@
 resource "google_service_account" "web" {
-  account_id   = "gembaleap-web"
-  display_name = "GembaLeap web app"
+  account_id   = "sutraos-web"
+  display_name = "SutraOS web app"
 }
 
 resource "google_service_account" "agents" {
-  account_id   = "gembaleap-agents"
-  display_name = "GembaLeap agent service"
+  account_id   = "sutraos-agents"
+  display_name = "SutraOS agent service"
 }
 
 locals {

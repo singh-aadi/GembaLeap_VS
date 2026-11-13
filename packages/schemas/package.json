@@ -1,5 +1,5 @@
 {
-  "name": "@gembaleap/schemas",
+  "name": "@sutraos/schemas",
   "private": true,
   "type": "module",
   "exports": {

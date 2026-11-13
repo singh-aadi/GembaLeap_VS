@@ -1,4 +1,4 @@
-import type { HeatmapFilters } from '@gembaleap/schemas'
+import type { HeatmapFilters } from '@sutraos/schemas'
 import { queryOptions } from '@tanstack/react-query'
 import { getSourcing, getSupplierDetail, getSupplierHeatmap } from './api'
 

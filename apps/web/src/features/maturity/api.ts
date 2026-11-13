@@ -1,4 +1,4 @@
-import { AnswerAssessmentInput, ReviewScoreInput } from '@gembaleap/schemas'
+import { AnswerAssessmentInput, ReviewScoreInput } from '@sutraos/schemas'
 import { createServerFn } from '@tanstack/react-start'
 import { z } from 'zod'
 import { agentsConfigured, callAgent } from '@/lib/agents.server'

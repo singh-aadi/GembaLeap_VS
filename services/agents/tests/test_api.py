@@ -1,6 +1,6 @@
 from fastapi.testclient import TestClient
 
-from gembaleap_agents.api import app
+from sutra_agents.api import app
 
 client = TestClient(app)
 

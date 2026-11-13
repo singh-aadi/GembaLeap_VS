@@ -4,7 +4,7 @@ import {
   SUPPLIER_ROLES,
   type CheckRequirement,
   type CheckResult,
-} from '@gembaleap/schemas'
+} from '@sutraos/schemas'
 import { createServerFn } from '@tanstack/react-start'
 import { AppError } from '@/lib/app-error'
 import { authMiddleware } from '@/lib/auth'

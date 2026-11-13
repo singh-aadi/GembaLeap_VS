@@ -20,9 +20,9 @@ class AgentOutputError(ValueError):
 async def run_json[T: BaseModel](
     agent: LlmAgent, tenant_id: str, payload: dict[str, Any], output: type[T]
 ) -> T:
-    runner = InMemoryRunner(agent=agent, app_name="gembaleap")
+    runner = InMemoryRunner(agent=agent, app_name="sutraos")
     session = await runner.session_service.create_session(
-        app_name="gembaleap", user_id=tenant_id, state={"tenant_id": tenant_id}
+        app_name="sutraos", user_id=tenant_id, state={"tenant_id": tenant_id}
     )
     message = types.Content(role="user", parts=[types.Part.from_text(text=json.dumps(payload))])
     text = ""

@@ -1,4 +1,4 @@
-import { sealReport } from '@gembaleap/schemas'
+import { sealReport } from '@sutraos/schemas'
 import { useMutation } from '@tanstack/react-query'
 import { useServerFn } from '@tanstack/react-start'
 import { Fingerprint, ShieldCheck } from 'lucide-react'

@@ -5,7 +5,7 @@ import {
   SourcingFilters,
   TierDecisionInput,
   type Tenant,
-} from '@gembaleap/schemas'
+} from '@sutraos/schemas'
 import { createServerFn } from '@tanstack/react-start'
 import { z } from 'zod'
 import { maturityView } from '@/features/maturity/maturity.server'

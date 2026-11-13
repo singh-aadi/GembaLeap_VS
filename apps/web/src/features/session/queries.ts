@@ -1,4 +1,4 @@
-import type { Locale } from '@gembaleap/schemas'
+import type { Locale } from '@sutraos/schemas'
 import { queryOptions } from '@tanstack/react-query'
 import { getMessages, getSession, listDemoAccounts } from './api'
 

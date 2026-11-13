@@ -1,4 +1,4 @@
-import type { CheckRequirement } from '@gembaleap/schemas'
+import type { CheckRequirement } from '@sutraos/schemas'
 import { Camera, Check, Ruler, ScanLine } from 'lucide-react'
 import { useFormat } from '@/lib/format'
 import { useT } from '@/lib/i18n'

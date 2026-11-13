@@ -1,4 +1,4 @@
-import type { Event } from '@gembaleap/schemas'
+import type { Event } from '@sutraos/schemas'
 import { IST, JST } from './clock'
 import type { SeedContext } from './context'
 import { id } from './ids'

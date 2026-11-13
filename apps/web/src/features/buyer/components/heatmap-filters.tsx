@@ -1,4 +1,4 @@
-import { Sector } from '@gembaleap/schemas'
+import { Sector } from '@sutraos/schemas'
 import { getRouteApi } from '@tanstack/react-router'
 import { LayoutGrid, Table2 } from 'lucide-react'
 import { Select } from '@/components/ui/field'

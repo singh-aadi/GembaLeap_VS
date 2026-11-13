@@ -1,15 +1,14 @@
-# Demo script
+# Demo script (SutraOS)
 
-Three minutes, one loop: a check on the line becomes a sealed report the buyer verifies. Synthetic data; start with `SEED_DATE=2026-10-18 pnpm dev` for the same numbers every time.
+Start with `SEED_DATE=2026-11-13 pnpm dev`. Synthetic data.
 
-| Time | Who                        | Do                                                                                         | Point out                                                                              |
-| ---- | -------------------------- | ------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------- |
-| 0:00 | Nguyen Thi Lan, line lead  | Open **Today**, then **Checklist**. Record the 11:00 packing photo.                        | The app is in Vietnamese. Save stays disabled until there is a photo.                  |
-| 0:30 | Lan                        | Record the 12:00 hole pitch as 48.15 mm.                                                   | Out of limit: it will not save without a containment note.                             |
-| 0:50 | Lan                        | **Capture**: pick Spot weld, Defect, record a voice note, send. Confirm the draft.         | Original language kept, codes suggested, confirmation chained in the audit log.        |
-| 1:20 | Haruka Sato, owner         | **Home**: built-in quality today, decisions waiting, what the evidence earns with Kestrel. | Nothing reaches the buyer until a person approves.                                     |
-| 1:40 | Haruka                     | Open the weekly report, approve and publish.                                               | Every statement links to evidence. Publishing seals it.                                |
-| 2:00 | Arjun Mehta, buyer quality | **Quality reports** → weekly → **Verify**.                                                 | Seal recomputed in the browser; audit chain re-hashed on the server.                   |
-| 2:20 | Arjun                      | **Suppliers**: grid view, then Sato Press Works.                                           | Only consented suppliers; suggested reduced inspection; the buyer's own payment clock. |
-| 2:40 | Arjun                      | **Sourcing**.                                                                              | New suppliers compete on days of evidence, not history.                                |
-| 2:50 | Haruka                     | **Sharing** → Revoke Kestrel. Arjun reloads the supplier page.                             | Access ends at once.                                                                   |
+| Time | Who               | Do                                                                | Point out                                                                                     |
+| ---- | ----------------- | ----------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| 0:00 | Amol, Sutra Coach | **My plants** → Shinde Precision Fabrication                      | Baseline reviewed, second assessor agrees; current flow beside future flow with 7 leak points |
+| 0:30 | Amol              | **Switch on** Drawing to check plan                               | One skill per leak point, logged in the audit chain                                           |
+| 0:50 | Suresh, owner     | **Sutra level**                                                   | L1 Recorded; what blocks L2 is specific evidence; Kestrel's rewards per level                 |
+| 1:20 | Suresh            | **Micro-AI skills**                                               | Each skill has a tier and one metric; cheapest model first                                    |
+| 1:40 | Suresh            | **Cash and schemes**                                              | Invoice at day 72 of 45 flagged; scheme eligibility with reasons; TReDS consent               |
+| 2:00 | Suresh            | **Audit packs** → ZED                                             | Every clause shows evidence or an explicit gap                                                |
+| 2:20 | Lan / Ravi        | **Checklist** → record with photo; out of limit needs containment | The daily loop that feeds the level                                                           |
+| 2:40 | Arjun, buyer SQE  | **Quality reports** → **Verify**                                  | Seal recomputed in the browser                                                                |

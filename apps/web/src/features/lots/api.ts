@@ -1,4 +1,4 @@
-import { ById, FixHeatInput, type Lot, type User } from '@gembaleap/schemas'
+import { ById, FixHeatInput, type Lot, type User } from '@sutraos/schemas'
 import { createServerFn } from '@tanstack/react-start'
 import { AppError } from '@/lib/app-error'
 import { authMiddleware } from '@/lib/auth'

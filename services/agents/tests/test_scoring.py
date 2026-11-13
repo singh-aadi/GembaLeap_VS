@@ -1,6 +1,6 @@
 import pytest
 
-from gembaleap_agents.scoring import Candidate, priority, rank, site_index, stage_level
+from sutra_agents.scoring import Candidate, priority, rank, site_index, stage_level
 
 
 def test_ranking_matches_typescript_fixture(fixture):

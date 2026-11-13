@@ -1,4 +1,4 @@
-import { evaluateMeasurement } from '@gembaleap/schemas'
+import { evaluateMeasurement } from '@sutraos/schemas'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useServerFn } from '@tanstack/react-start'
 import { Camera } from 'lucide-react'

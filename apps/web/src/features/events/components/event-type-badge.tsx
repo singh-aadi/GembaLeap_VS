@@ -1,4 +1,4 @@
-import type { EventType } from '@gembaleap/schemas'
+import type { EventType } from '@sutraos/schemas'
 import { CircleX, Clock, Lightbulb, Package, ShieldAlert, type LucideIcon } from 'lucide-react'
 import { Badge, type BadgeTone } from '@/components/ui/badge'
 import { useT } from '@/lib/i18n'

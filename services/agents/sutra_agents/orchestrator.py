@@ -9,7 +9,7 @@ from .config import settings
 
 def orchestrator() -> LlmAgent:
     return LlmAgent(
-        name="gembaleap",
+        name="sutraos",
         model=settings().model("flash"),
         description="Routes chat messages to the capture and ask specialists.",
         instruction=prompt("orchestrator"),

@@ -1,4 +1,4 @@
-import { EIGHT_D_FIELDS } from '@gembaleap/schemas'
+import { EIGHT_D_FIELDS } from '@sutraos/schemas'
 import { TriangleAlert } from 'lucide-react'
 import { AiBlock } from '@/components/app/ai-block'
 import { EvidenceList } from '@/components/app/evidence-link'

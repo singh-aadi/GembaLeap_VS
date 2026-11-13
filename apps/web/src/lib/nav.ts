@@ -1,6 +1,11 @@
-import type { Role } from '@gembaleap/schemas'
+import type { Role } from '@sutraos/schemas'
 import {
   Camera,
+  Cpu,
+  IndianRupee,
+  Medal,
+  FolderCheck,
+  Map as MapIcon,
   ChartColumn,
   ClipboardCheck,
   Factory,
@@ -43,6 +48,20 @@ const SUPPLIER_NAV: NavGroup[] = [
     ],
   },
   {
+    label: 'nav.group.levelUp',
+    items: [
+      { to: '/s/level', label: 'nav.level', short: 'nav.level', icon: Medal },
+      { to: '/s/skills', label: 'nav.skills', short: 'nav.skills.short', icon: Cpu },
+      {
+        to: '/s/audit-packs',
+        label: 'nav.auditPacks',
+        short: 'nav.auditPacks.short',
+        icon: FolderCheck,
+      },
+      { to: '/s/cash', label: 'nav.cash', short: 'nav.cash', icon: IndianRupee },
+    ],
+  },
+  {
     label: 'nav.group.improve',
     items: [
       { to: '/s/maturity', label: 'nav.maturity', short: 'nav.maturity', icon: ChartColumn },
@@ -80,17 +99,26 @@ const BUYER_NAV: NavGroup[] = [
   },
 ]
 
+const COACH_NAV: NavGroup[] = [
+  {
+    label: 'nav.group.coach',
+    items: [{ to: '/c/plants', label: 'nav.plants', short: 'nav.plants', icon: MapIcon }],
+  },
+]
+
 /** Bottom-tab order on phones. Anything else sits under "More". */
 const MOBILE_TABS: Record<Role, NavSection[]> = {
-  supplier_owner: ['/s/home', '/s/checklist', '/s/capture', '/s/reports'],
+  operator: ['/s/home', '/s/checklist', '/s/capture', '/s/events'],
+  supplier_owner: ['/s/home', '/s/level', '/s/checklist', '/s/reports'],
   line_lead: ['/s/home', '/s/checklist', '/s/capture', '/s/events', '/s/shift-brief'],
   supplier_quality: ['/s/home', '/s/checklist', '/s/reports', '/s/lots'],
   buyer_quality: ['/b/suppliers', '/b/reports', '/b/ncr', '/b/ask'],
   buyer_procurement: ['/b/suppliers', '/b/sourcing', '/b/ask'],
+  sutra_coach: ['/c/plants'],
 }
 
 export function navFor(role: Role, side: Side): NavGroup[] {
-  const groups = side === 'supplier' ? SUPPLIER_NAV : BUYER_NAV
+  const groups = side === 'supplier' ? SUPPLIER_NAV : side === 'coach' ? COACH_NAV : BUYER_NAV
   return groups
     .map((g) => ({ ...g, items: g.items.filter((i) => canOpen(role, i.to)) }))
     .filter((g) => g.items.length > 0)

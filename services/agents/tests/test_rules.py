@@ -1,4 +1,4 @@
-from gembaleap_agents import rules
+from sutra_agents import rules
 
 
 def test_heat_mismatch_fails():

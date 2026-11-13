@@ -54,7 +54,9 @@ export function OwnerHome() {
             <CardBody className="space-y-4">
               <div className="flex items-center justify-between gap-3">
                 <div>
-                  <p className="text-xs text-muted">{t('home.ladder')}</p>
+                  <Link to="/s/level" className="text-xs text-accent hover:underline">
+                    {t('home.ladder')}
+                  </Link>
                   <p className="mt-1 text-xl font-semibold text-heading tabular-nums">
                     L{data.ladder.level}{' '}
                     <span className="text-sm font-normal text-muted">

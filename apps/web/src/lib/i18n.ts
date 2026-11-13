@@ -11,6 +11,9 @@ export function useT() {
 
 export const LOCALE_NAMES = {
   en: 'English',
+  mr: 'मराठी',
+  gu: 'ગુજરાતી',
+  kn: 'ಕನ್ನಡ',
   ja: '日本語',
   vi: 'Tiếng Việt',
   hi: 'हिन्दी',

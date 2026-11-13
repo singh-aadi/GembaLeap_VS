@@ -1,4 +1,4 @@
-import type { ScoreState } from '@gembaleap/schemas'
+import type { ScoreState } from '@sutraos/schemas'
 import { CircleAlert, CircleCheck, CircleDashed } from 'lucide-react'
 import { useT } from '@/lib/i18n'
 

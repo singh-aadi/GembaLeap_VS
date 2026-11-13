@@ -1,4 +1,4 @@
-import type { CreateEventDraftInput } from '@gembaleap/schemas'
+import type { CreateEventDraftInput } from '@sutraos/schemas'
 
 /**
  * Offline capture queue in IndexedDB. Media stays as Blobs until it can be
@@ -13,7 +13,7 @@ export type OutboxItem = {
   media: OutboxMedia[]
 }
 
-const DB_NAME = 'gembaleap'
+const DB_NAME = 'sutraos'
 const STORE = 'outbox'
 const listeners = new Set<() => void>()
 

@@ -6,5 +6,9 @@ const route = getRouteApi('/s')
 
 export function HomePage() {
   const { shell } = route.useRouteContext()
-  return shell.user.role === 'line_lead' ? <LineLeadToday /> : <OwnerHome />
+  return shell.user.role === 'line_lead' || shell.user.role === 'operator' ? (
+    <LineLeadToday />
+  ) : (
+    <OwnerHome />
+  )
 }

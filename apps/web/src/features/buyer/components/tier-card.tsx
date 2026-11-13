@@ -1,4 +1,4 @@
-import type { InspectionTier } from '@gembaleap/schemas'
+import type { InspectionTier } from '@sutraos/schemas'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useServerFn } from '@tanstack/react-start'
 import { toast } from 'sonner'

@@ -1,4 +1,4 @@
-import type { CheckRecord, ChecklistItem, Site, SlotStatus } from '@gembaleap/schemas'
+import type { CheckRecord, ChecklistItem, Site, SlotStatus } from '@sutraos/schemas'
 import { evidenceRefs, now, type Db } from '@/lib/store.server'
 import { zonedDate, zonedInstant } from '@/lib/time'
 

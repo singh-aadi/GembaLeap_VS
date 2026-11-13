@@ -1,4 +1,4 @@
-import { AskAnswer, AskInput, BUYER_ROLES, type ConsentScope } from '@gembaleap/schemas'
+import { AskAnswer, AskInput, BUYER_ROLES, type ConsentScope } from '@sutraos/schemas'
 import { createServerFn } from '@tanstack/react-start'
 import { agentsConfigured, callAgent } from '@/lib/agents.server'
 import { AppError } from '@/lib/app-error'

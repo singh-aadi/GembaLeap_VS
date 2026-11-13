@@ -28,7 +28,7 @@ const { schemas: defs } = z.toJSONSchema(registry, {
 for (const def of Object.values(defs)) delete def.$schema
 
 writeFileSync(
-  join(outDir, 'gembaleap.schema.json'),
+  join(outDir, 'sutraos.schema.json'),
   JSON.stringify({ $schema: 'https://json-schema.org/draft/2020-12/schema', $defs: defs }, null, 2),
 )
 console.log(`Wrote ${Object.keys(defs).length} schemas to ${outDir}`)

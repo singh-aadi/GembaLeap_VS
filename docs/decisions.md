@@ -96,4 +96,26 @@ Specialists return JSON validated with Pydantic instead of ADK `output_schema`, 
 
 ## D15 · Generated files in git
 
-`apps/web/src/routeTree.gen.ts` and `services/agents/gembaleap_agents/schemas.py` are committed so typecheck and tests run without a build. CI regenerates the Pydantic models and fails on drift.
+`apps/web/src/routeTree.gen.ts` and `services/agents/sutra_agents/schemas.py` are committed so typecheck and tests run without a build. CI regenerates the Pydantic models and fails on drift.
+
+## D16 · Pivot to SutraOS (13 Nov 2026)
+
+GembaLeap's evidence loop is kept as the Daily Loop and Trust Ledger modules. SutraOS adds the Sutra Method around it, per `docs/brd.md` and `docs/prd.md`:
+
+| Added                                                                                                                                                                                                  | Where                                                                                                 |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------- |
+| Sutra Maturity Ladder L0–L5 and five baseline dimensions (standard work, inspection and evidence, problem solving, delivery and flow, data and connectivity)                                           | `packages/schemas/src/sutra.ts`, `/s/level`                                                           |
+| Deterministic rules: plant level, promotion streak (L2 30 days; L3 90 days, ≥ 95%, buyer verified), payment clock vs 45-day MSMED limit, model escalation, scheme eligibility, three-way invoice match | `packages/schemas/src/rules.ts`, mirrored in `sutra_agents/levels.py`, `payments.py`, `escalation.py` |
+| Micro-AI skill library with per-plant switches and metrics                                                                                                                                             | `/s/skills`                                                                                           |
+| Audit pack builder for ZED, ISO 9001, IATF 16949 (gaps shown, nothing invented)                                                                                                                        | `/s/audit-packs`                                                                                      |
+| Cash: payment clock, scheme finder, TReDS referral consent                                                                                                                                             | `/s/cash`                                                                                             |
+| Coach console: plants, baseline, current vs future flow, recipe picker                                                                                                                                 | `/c/plants`                                                                                           |
+| Roles `operator` and `sutra_coach`; tenant kind `sutra`                                                                                                                                                | schemas, `lib/roles.ts`                                                                               |
+| Beachhead seed plant: Shinde Precision Fabrication, Chakan (T1 tier), coach Amol, operator Ravi                                                                                                        | `packages/seed/src/sutra.ts`                                                                          |
+| WhatsApp webhook with deterministic routing (photo → gauge reader, voice → event, text → ask)                                                                                                          | `sutra_agents/channels.py`                                                                            |
+| Agents: gauge reader (Flash-Lite), baseline and planner (Pro)                                                                                                                                          | `sutra_agents/agents/specialists.py`                                                                  |
+| Region `asia-south1`, backups `asia-south2`                                                                                                                                                            | `infra/`                                                                                              |
+
+Scoped as scaffold: storage tiers are modelled (`StorageTier`) but only the in-memory store exists; WhatsApp replies are not sent until a provider is chosen; Gujarati and Kannada catalogues are empty and fall back to English (Marathi, Hindi, Tamil cover line screens); Tally/Zoho/SAP connectors, SPC drift alerts and the baseline wizard UI are not built yet.
+
+Dimension keys changed, so the GembaLeap stage scores were remapped: capture → inspection_evidence, standardisation → standard_work, traceability → data_connectivity, decision_use → problem_solving, people_cadence → delivery_flow.

@@ -7,7 +7,7 @@ import type {
   Passport,
   QualityReport,
   SupplierScorecard,
-} from '@gembaleap/schemas'
+} from '@sutraos/schemas'
 import { IST, JST } from './clock'
 import type { SeedContext } from './context'
 import { EVENT_IDS } from './events'
@@ -436,17 +436,17 @@ export function buildTrust(ctx: SeedContext) {
 
   const lastReport = (day: number, hhmm: string, offset = JST) => clock.local(day, hhmm, offset)
   const dims = (
-    capture: number,
-    standardisation: number,
-    traceability: number,
-    decision_use: number,
-    people_cadence: number,
+    inspection_evidence: number,
+    standard_work: number,
+    data_connectivity: number,
+    problem_solving: number,
+    delivery_flow: number,
   ) => ({
-    capture,
-    standardisation,
-    traceability,
-    decision_use,
-    people_cadence,
+    inspection_evidence,
+    standard_work,
+    data_connectivity,
+    problem_solving,
+    delivery_flow,
   })
 
   const scorecards: SupplierScorecard[] = [

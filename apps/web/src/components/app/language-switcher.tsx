@@ -1,4 +1,4 @@
-import { Locale } from '@gembaleap/schemas'
+import { Locale } from '@sutraos/schemas'
 import { useQueryClient } from '@tanstack/react-query'
 import { useRouter, useRouteContext } from '@tanstack/react-router'
 import { useServerFn } from '@tanstack/react-start'

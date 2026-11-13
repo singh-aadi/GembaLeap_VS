@@ -1,4 +1,4 @@
-import { ById, FACTOR_LOADING } from '@gembaleap/schemas'
+import { ById, FACTOR_LOADING } from '@sutraos/schemas'
 import { createServerFn } from '@tanstack/react-start'
 import { maturityView } from '@/features/maturity/maturity.server'
 import { AppError } from '@/lib/app-error'

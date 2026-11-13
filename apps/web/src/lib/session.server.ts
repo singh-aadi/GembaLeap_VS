@@ -1,6 +1,6 @@
 import { createHmac, timingSafeEqual } from 'node:crypto'
 import { deleteCookie, getCookie, setCookie } from '@tanstack/react-start/server'
-import { Locale } from '@gembaleap/schemas'
+import { Locale } from '@sutraos/schemas'
 import { db } from './store.server'
 
 /**

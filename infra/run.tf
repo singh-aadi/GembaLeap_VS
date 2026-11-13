@@ -1,5 +1,5 @@
 resource "google_cloud_run_v2_service" "agents" {
-  name     = "gembaleap-agents"
+  name     = "sutraos-agents"
   location = var.region
   ingress  = "INGRESS_TRAFFIC_INTERNAL_ONLY"
 
@@ -13,6 +13,10 @@ resource "google_cloud_run_v2_service" "agents" {
 
     containers {
       image = var.agents_image
+      env {
+        name  = "GEMINI_FLASH_LITE_MODEL"
+        value = var.gemini_flash_lite_model
+      }
       env {
         name  = "GEMINI_FLASH_MODEL"
         value = var.gemini_flash_model
@@ -38,7 +42,7 @@ resource "google_cloud_run_v2_service" "agents" {
 }
 
 resource "google_cloud_run_v2_service" "web" {
-  name     = "gembaleap-web"
+  name     = "sutraos-web"
   location = var.region
 
   template {

@@ -6,7 +6,7 @@ import {
   RaiseNcrInput,
   type Ncr,
   type User,
-} from '@gembaleap/schemas'
+} from '@sutraos/schemas'
 import { createServerFn } from '@tanstack/react-start'
 import { agentsConfigured, callAgent } from '@/lib/agents.server'
 import { AppError } from '@/lib/app-error'

@@ -18,7 +18,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1, viewport-fit=cover' },
       { name: 'theme-color', content: '#0b1f3a' },
-      { title: 'GembaLeap' },
+      { title: 'SutraOS' },
     ],
     links: [
       { rel: 'stylesheet', href: appCss },
@@ -62,7 +62,7 @@ function RootError() {
   return (
     <RootDocument lang="en">
       <main className="mx-auto max-w-md p-8">
-        <h1 className="text-xl">GembaLeap is unavailable</h1>
+        <h1 className="text-xl">SutraOS is unavailable</h1>
         <p className="mt-2 text-muted">
           Reload the page. If it keeps failing, the service may be restarting.
         </p>

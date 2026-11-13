@@ -1,4 +1,4 @@
-import type { Drift } from '@gembaleap/schemas'
+import type { Drift } from '@sutraos/schemas'
 import { Minus, TrendingDown, TrendingUp } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { useT } from '@/lib/i18n'

@@ -1,4 +1,4 @@
-import type { Claim, ConsentScope } from '@gembaleap/schemas'
+import type { Claim, ConsentScope } from '@sutraos/schemas'
 import type { Db } from '@/lib/store.server'
 
 type Doc = Claim & { scope: ConsentScope | 'internal'; at: string }

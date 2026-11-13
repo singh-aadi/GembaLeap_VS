@@ -25,8 +25,8 @@ jobs:
       - run: pnpm typecheck
       - run: pnpm test
       - run: pnpm i18n:check
-      - run: pnpm --filter @gembaleap/web build
-      - run: pnpm --filter @gembaleap/web exec playwright install --with-deps chromium
+      - run: pnpm --filter @sutraos/web build
+      - run: pnpm --filter @sutraos/web exec playwright install --with-deps chromium
       - run: pnpm e2e
       - uses: actions/upload-artifact@v4
         if: failure()
@@ -48,7 +48,7 @@ jobs:
       - run: uv run pytest -q
       - name: Evals
         run: |
-          uv run uvicorn gembaleap_agents.api:app --port 8080 &
+          uv run uvicorn sutra_agents.api:app --port 8080 &
           sleep 3
           uv run python ../../evals/run.py
 
@@ -65,7 +65,7 @@ jobs:
       - uses: astral-sh/setup-uv@v6
       - run: pnpm install --frozen-lockfile
       - run: services/agents/scripts/generate-schemas.sh
-      - run: git diff --exit-code services/agents/gembaleap_agents/schemas.py
+      - run: git diff --exit-code services/agents/sutra_agents/schemas.py
 
   infra:
     runs-on: ubuntu-latest

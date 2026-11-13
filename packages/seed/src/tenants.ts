@@ -1,4 +1,4 @@
-import type { Site, Stage, Tenant, User } from '@gembaleap/schemas'
+import type { Site, Stage, Tenant, User } from '@sutraos/schemas'
 import { id } from './ids'
 
 export const T = {
@@ -16,11 +16,14 @@ export const T = {
   lakshmi: id('tenant:lakshmi'),
   okada: id('tenant:okada'),
   saigon: id('tenant:saigon'),
+  shinde: id('tenant:shinde'),
+  sutra: id('tenant:sutra'),
 } as const
 
 export const S = {
   sato: id('site:sato-toyota'),
   shakti: id('site:shakti-coimbatore'),
+  shinde: id('site:shinde-chakan'),
 } as const
 
 export const U = {
@@ -32,6 +35,11 @@ export const U = {
   sunil: id('user:sunil'),
   arjun: id('user:arjun'),
   kaori: id('user:kaori'),
+  suresh: id('user:suresh'),
+  ravi: id('user:ravi'),
+  sunita: id('user:sunita'),
+  amol: id('user:amol'),
+  priya: id('user:priya'),
 } as const
 
 const supplier = (
@@ -182,6 +190,27 @@ export const tenants: Tenant[] = [
     'vi',
     true,
   ),
+  supplier(
+    T.shinde,
+    'Shinde Precision Fabrication',
+    'IN',
+    'Chakan, Pune',
+    'machining',
+    ['CNC turning', 'Sheet metal', 'MIG welding'],
+    'mr',
+  ),
+  {
+    id: T.sutra,
+    name: 'SutraOS Coaching',
+    kind: 'sutra',
+    country: 'IN',
+    city: 'Pune',
+    sector: 'industrial_equipment',
+    processes: [],
+    locale: 'en',
+    openProfile: false,
+    synthetic: true,
+  },
 ]
 
 /** Prospect suppliers keep evidence on their own sites; only their certificates appear in the seed. */
@@ -222,6 +251,14 @@ export const sites: Site[] = [
   prospectSite(T.lakshmi, 'Asia/Kolkata', 2),
   prospectSite(T.batam, 'Asia/Jakarta', 2),
   prospectSite(T.saigon, 'Asia/Ho_Chi_Minh', 1),
+  {
+    id: S.shinde,
+    tenantId: T.shinde,
+    name: 'Chakan MIDC plant',
+    timeZone: 'Asia/Kolkata',
+    ladderLevel: 1,
+    siteIndex: 1.2,
+  },
 ]
 
 export const ST = {
@@ -234,6 +271,10 @@ export const ST = {
   cnc: id('stage:shakti:cnc'),
   hydro: id('stage:shakti:hydro'),
   finalShakti: id('stage:shakti:final'),
+  receipt: id('stage:shinde:receipt'),
+  cncShinde: id('stage:shinde:cnc'),
+  welding: id('stage:shinde:weld'),
+  finalShinde: id('stage:shinde:final'),
 } as const
 
 export const stages: Stage[] = [
@@ -311,6 +352,34 @@ export const stages: Stage[] = [
     order: 5,
     weight: 1,
     name: { en: 'Final inspection', ta: 'இறுதி ஆய்வு', hi: 'अंतिम निरीक्षण' },
+  },
+  {
+    id: ST.receipt,
+    siteId: S.shinde,
+    order: 1,
+    weight: 1,
+    name: { en: 'Material receipt', mr: 'माल स्वीकृती', hi: 'माल प्राप्ति' },
+  },
+  {
+    id: ST.cncShinde,
+    siteId: S.shinde,
+    order: 2,
+    weight: 1,
+    name: { en: 'CNC turning', mr: 'CNC टर्निंग', hi: 'सीएनसी टर्निंग' },
+  },
+  {
+    id: ST.welding,
+    siteId: S.shinde,
+    order: 3,
+    weight: 1,
+    name: { en: 'MIG welding', mr: 'MIG वेल्डिंग', hi: 'एमआईजी वेल्डिंग' },
+  },
+  {
+    id: ST.finalShinde,
+    siteId: S.shinde,
+    order: 4,
+    weight: 1,
+    name: { en: 'Final inspection', mr: 'अंतिम तपासणी', hi: 'अंतिम निरीक्षण' },
   },
 ]
 
@@ -393,6 +462,56 @@ export const users: User[] = [
     title: 'Category manager, pressed parts',
     locale: 'ja',
     languages: ['ja', 'en'],
+    siteIds: [],
+  },
+  {
+    id: U.suresh,
+    tenantId: T.shinde,
+    role: 'supplier_owner',
+    name: 'Suresh Shinde',
+    title: 'Proprietor',
+    locale: 'en',
+    languages: ['mr', 'hi', 'en'],
+    siteIds: [S.shinde],
+  },
+  {
+    id: U.ravi,
+    tenantId: T.shinde,
+    role: 'operator',
+    name: 'Ravi Patil',
+    title: 'CNC operator',
+    locale: 'mr',
+    languages: ['mr', 'hi'],
+    siteIds: [S.shinde],
+  },
+  {
+    id: U.sunita,
+    tenantId: T.shinde,
+    role: 'line_lead',
+    name: 'Sunita Jadhav',
+    title: 'Line lead, CNC bay',
+    locale: 'mr',
+    languages: ['mr', 'hi', 'en'],
+    siteIds: [S.shinde],
+  },
+  {
+    id: U.amol,
+    tenantId: T.sutra,
+    role: 'sutra_coach',
+    name: 'Amol Kulkarni',
+    title: 'Sutra Coach, Pune belt',
+    locale: 'en',
+    languages: ['mr', 'hi', 'en'],
+    siteIds: [S.shinde, S.sato, S.shakti],
+  },
+  {
+    id: U.priya,
+    tenantId: T.kestrel,
+    role: 'buyer_procurement',
+    name: 'Priya Deshpande',
+    title: 'Category manager, machined parts',
+    locale: 'en',
+    languages: ['en', 'mr', 'hi'],
     siteIds: [],
   },
 ]

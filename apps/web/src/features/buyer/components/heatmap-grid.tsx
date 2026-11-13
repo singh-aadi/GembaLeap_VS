@@ -1,4 +1,4 @@
-import { Dimension } from '@gembaleap/schemas'
+import { Dimension } from '@sutraos/schemas'
 import { Link } from '@tanstack/react-router'
 import { Card } from '@/components/ui/card'
 import { cn } from '@/lib/cn'

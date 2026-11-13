@@ -1,9 +1,9 @@
-import { EventType } from '@gembaleap/schemas'
+import { EventType } from '@sutraos/schemas'
 import { getRouteApi } from '@tanstack/react-router'
 import { Select } from '@/components/ui/field'
 import { useT } from '@/lib/i18n'
 import { useLocalized } from '@/lib/localized'
-import type { LocalizedText } from '@gembaleap/schemas'
+import type { LocalizedText } from '@sutraos/schemas'
 
 const route = getRouteApi('/s/events/')
 

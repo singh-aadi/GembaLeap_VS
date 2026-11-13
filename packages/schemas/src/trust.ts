@@ -142,6 +142,8 @@ export const AuditAction = z.enum([
   'cycle.open',
   'cycle.close',
   'buyer.view',
+  'skill.toggle',
+  'referral.consent',
 ])
 export type AuditAction = z.infer<typeof AuditAction>
 

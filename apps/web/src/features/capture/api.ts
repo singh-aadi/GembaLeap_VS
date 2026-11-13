@@ -1,4 +1,4 @@
-import { CreateEventDraftInput, Event, SUPPLIER_ROLES } from '@gembaleap/schemas'
+import { CreateEventDraftInput, Event, SUPPLIER_ROLES } from '@sutraos/schemas'
 import { createServerFn } from '@tanstack/react-start'
 import { agentsConfigured, callAgent } from '@/lib/agents.server'
 import { AppError } from '@/lib/app-error'

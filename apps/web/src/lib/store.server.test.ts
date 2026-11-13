@@ -1,4 +1,4 @@
-import { sealReport } from '@gembaleap/schemas'
+import { sealReport } from '@sutraos/schemas'
 import { beforeAll, describe, expect, it } from 'vitest'
 import { checklistState } from '@/features/checklist/checklist.server'
 import { appendAudit, db, verifyAuditChain, type Db } from './store.server'

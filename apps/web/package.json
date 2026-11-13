@@ -1,5 +1,5 @@
 {
-  "name": "@gembaleap/web",
+  "name": "@sutraos/web",
   "private": true,
   "type": "module",
   "scripts": {
@@ -12,8 +12,8 @@
     "i18n:check": "node scripts/check-messages.mjs"
   },
   "dependencies": {
-    "@gembaleap/schemas": "workspace:*",
-    "@gembaleap/seed": "workspace:*",
+    "@sutraos/schemas": "workspace:*",
+    "@sutraos/seed": "workspace:*",
     "@tanstack/react-form": "1.33.5",
     "@tanstack/react-query": "5.104.4",
     "@tanstack/react-router": "1.170.45",

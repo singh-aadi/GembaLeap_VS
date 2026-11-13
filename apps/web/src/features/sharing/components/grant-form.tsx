@@ -1,4 +1,4 @@
-import { ConsentScope } from '@gembaleap/schemas'
+import { ConsentScope } from '@sutraos/schemas'
 import { useForm } from '@tanstack/react-form'
 import { useQueryClient } from '@tanstack/react-query'
 import { useServerFn } from '@tanstack/react-start'

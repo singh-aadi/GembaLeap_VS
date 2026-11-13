@@ -1,4 +1,4 @@
-import type { Claim } from '@gembaleap/schemas'
+import type { Claim } from '@sutraos/schemas'
 import type { EvidenceMap } from '@/lib/evidence-ref'
 import { EvidenceList } from './evidence-link'
 

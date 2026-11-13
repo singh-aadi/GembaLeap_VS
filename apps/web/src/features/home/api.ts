@@ -1,4 +1,4 @@
-import { SUPPLIER_ROLES } from '@gembaleap/schemas'
+import { SUPPLIER_ROLES } from '@sutraos/schemas'
 import { createServerFn } from '@tanstack/react-start'
 import { checklistState } from '@/features/checklist/checklist.server'
 import { authMiddleware } from '@/lib/auth'

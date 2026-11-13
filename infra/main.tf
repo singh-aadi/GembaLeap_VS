@@ -21,7 +21,7 @@ resource "google_project_service" "apis" {
 }
 
 resource "google_artifact_registry_repository" "images" {
-  repository_id = "gembaleap"
+  repository_id = "sutraos"
   location      = var.region
   format        = "DOCKER"
   depends_on    = [google_project_service.apis]
@@ -36,7 +36,7 @@ resource "google_firestore_database" "main" {
 }
 
 resource "google_storage_bucket" "media" {
-  name                        = "${var.project}-gembaleap-media"
+  name                        = "${var.project}-sutraos-media"
   location                    = var.region
   uniform_bucket_level_access = true
   public_access_prevention    = "enforced"
@@ -62,12 +62,12 @@ resource "google_pubsub_topic" "evidence_uploaded" {
 }
 
 resource "google_bigquery_dataset" "analytics" {
-  dataset_id = "gembaleap"
+  dataset_id = "sutraos"
   location   = var.region
 }
 
 resource "google_kms_key_ring" "audit" {
-  name       = "gembaleap-audit"
+  name       = "sutraos-audit"
   location   = var.region
   depends_on = [google_project_service.apis]
 }

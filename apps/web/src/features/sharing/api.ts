@@ -1,4 +1,4 @@
-import { ById, GrantConsentInput } from '@gembaleap/schemas'
+import { ById, GrantConsentInput } from '@sutraos/schemas'
 import { createServerFn } from '@tanstack/react-start'
 import { z } from 'zod'
 import { AppError } from '@/lib/app-error'

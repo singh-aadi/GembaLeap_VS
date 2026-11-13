@@ -38,10 +38,10 @@ importers:
 
   apps/web:
     dependencies:
-      '@gembaleap/schemas':
+      '@sutraos/schemas':
         specifier: workspace:*
         version: link:../../packages/schemas
-      '@gembaleap/seed':
+      '@sutraos/seed':
         specifier: workspace:*
         version: link:../../packages/seed
       '@tanstack/react-form':
@@ -148,7 +148,7 @@ importers:
 
   packages/seed:
     dependencies:
-      '@gembaleap/schemas':
+      '@sutraos/schemas':
         specifier: workspace:*
         version: link:../schemas
       zod:

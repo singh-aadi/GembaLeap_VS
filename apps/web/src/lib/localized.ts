@@ -1,4 +1,4 @@
-import type { LocalizedText } from '@gembaleap/schemas'
+import type { LocalizedText } from '@sutraos/schemas'
 import { useIntl } from 'react-intl'
 
 /** Picks tenant-authored text in the reader's language, falling back to English. */

@@ -1,4 +1,4 @@
-import { ById, CloseCycleInput, SUPPLIER_ROLES } from '@gembaleap/schemas'
+import { ById, CloseCycleInput, SUPPLIER_ROLES } from '@sutraos/schemas'
 import { createServerFn } from '@tanstack/react-start'
 import { AppError } from '@/lib/app-error'
 import { authMiddleware } from '@/lib/auth'

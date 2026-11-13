@@ -1,4 +1,4 @@
-import type { EvidenceItem } from '@gembaleap/schemas'
+import type { EvidenceItem } from '@sutraos/schemas'
 import type { Clock } from './clock'
 import { fakeSha256, id } from './ids'
 import { sites } from './tenants'

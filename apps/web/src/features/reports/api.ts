@@ -5,7 +5,7 @@ import {
   SUPPLIER_ROLES,
   type QualityReport,
   type User,
-} from '@gembaleap/schemas'
+} from '@sutraos/schemas'
 import { createServerFn } from '@tanstack/react-start'
 import { z } from 'zod'
 import { AppError } from '@/lib/app-error'

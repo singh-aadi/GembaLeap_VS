@@ -10,7 +10,7 @@ terraform {
 
   # Configure the state bucket per environment: terraform init -backend-config="bucket=..."
   backend "gcs" {
-    prefix = "gembaleap"
+    prefix = "sutraos"
   }
 }
 

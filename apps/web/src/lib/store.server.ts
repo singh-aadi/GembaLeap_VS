@@ -9,8 +9,8 @@ import {
   type AuditEntryBody,
   type Lot,
   type Passport,
-} from '@gembaleap/schemas'
-import { buildSeed, type Seed } from '@gembaleap/seed'
+} from '@sutraos/schemas'
+import { buildSeed, type Seed } from '@sutraos/seed'
 import { AppError } from './app-error'
 import type { EvidenceRef } from './evidence-ref'
 

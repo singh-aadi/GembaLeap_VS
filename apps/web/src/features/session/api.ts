@@ -1,5 +1,5 @@
-import { DEMO_ACCOUNTS } from '@gembaleap/seed'
-import { Id, Locale } from '@gembaleap/schemas'
+import { DEMO_ACCOUNTS } from '@sutraos/seed'
+import { Id, Locale } from '@sutraos/schemas'
 import { createServerFn } from '@tanstack/react-start'
 import { z } from 'zod'
 import { AppError } from '@/lib/app-error'

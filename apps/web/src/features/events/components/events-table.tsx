@@ -1,4 +1,4 @@
-import type { LocalizedText } from '@gembaleap/schemas'
+import type { LocalizedText } from '@sutraos/schemas'
 import { createColumnHelper, FlexRender, tableFeatures, useTable } from '@tanstack/react-table'
 import { Link } from '@tanstack/react-router'
 import { useMemo } from 'react'

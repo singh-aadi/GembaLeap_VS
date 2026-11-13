@@ -1,4 +1,4 @@
-import { Dimension, type Level } from '@gembaleap/schemas'
+import { Dimension, type Level } from '@sutraos/schemas'
 import { evidenceRefs, type Db } from '@/lib/store.server'
 
 /** Latest scored assessment for a site: stage × dimension grid plus each stage's level. */

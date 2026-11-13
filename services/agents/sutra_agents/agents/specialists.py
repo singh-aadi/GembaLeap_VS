@@ -76,3 +76,30 @@ def ask() -> LlmAgent:
         "Answers questions about the evidence a caller may see, with citations.",
         [catalog.search_events, catalog.get_evidence, catalog.get_check_records, catalog.get_lot],
     )
+
+
+def gauge_reader() -> LlmAgent:
+    return specialist(
+        "gauge_reader",
+        "flash_lite",
+        "Reads the value on a gauge or meter photo. Limits are applied in code.",
+        [],
+    )
+
+
+def baseline() -> LlmAgent:
+    return specialist(
+        "baseline",
+        "pro",
+        "Drafts baseline scores and a current-state process map from a gemba walk.",
+        [catalog.get_stage_catalog, catalog.search_events, catalog.get_evidence],
+    )
+
+
+def planner() -> LlmAgent:
+    return specialist(
+        "planner",
+        "pro",
+        "Drafts a control plan from a drawing and PO, and picks skills for leak points.",
+        [catalog.get_stage_catalog],
+    )

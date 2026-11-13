@@ -20,9 +20,9 @@ import {
   Tenant,
   User,
   Invoice,
-} from '@gembaleap/schemas'
+} from '@sutraos/schemas'
 import { describe, expect, it } from 'vitest'
-import type { z } from 'zod'
+import type { z, ZodType } from 'zod'
 import { buildSeed } from './index'
 
 const seed = buildSeed('2026-10-18')
@@ -96,5 +96,32 @@ describe('priority formula', () => {
       ),
     ) as Array<Parameters<typeof priority>[0] & { priority: number }>
     for (const row of fixture) expect(Math.round(priority(row) * 10) / 10).toBe(row.priority)
+  })
+})
+
+describe('sutra seed', () => {
+  it('validates plant profiles, baselines, maps, skills and audit packs', async () => {
+    const s = await import('@sutraos/schemas')
+    const all: Array<[ZodType, unknown[]]> = [
+      [s.PlantProfile, seed.plantProfiles],
+      [s.Baseline, seed.baselines],
+      [s.ProcessMap, seed.processMaps],
+      [s.Skill, seed.skills],
+      [s.PlantSkill, seed.plantSkills],
+      [s.AuditPack, seed.auditPacks],
+      [s.RewardRule, seed.rewardRules],
+      [s.Scheme, seed.schemes],
+    ]
+    for (const [schema, rows] of all) {
+      expect(rows.length).toBeGreaterThan(0)
+      for (const row of rows) expect(() => schema.parse(row)).not.toThrow()
+    }
+  })
+
+  it('switches on at least five skills at the beachhead plant', () => {
+    const shinde = seed.plantProfiles.find((p) => p.cluster === 'Pune–Chakan')
+    expect(
+      seed.plantSkills.filter((p) => p.siteId === shinde?.siteId && p.enabled).length,
+    ).toBeGreaterThanOrEqual(5)
   })
 })

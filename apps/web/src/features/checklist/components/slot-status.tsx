@@ -1,4 +1,4 @@
-import type { SlotStatus } from '@gembaleap/schemas'
+import type { SlotStatus } from '@sutraos/schemas'
 import { CircleAlert, CircleCheck, CircleDot, Circle, Clock, type LucideIcon } from 'lucide-react'
 import { cn } from '@/lib/cn'
 import { useT } from '@/lib/i18n'

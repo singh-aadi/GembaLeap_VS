@@ -11,19 +11,24 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BRouteRouteImport } from './routes/b/route'
+import { Route as CRouteRouteImport } from './routes/c/route'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as SRouteRouteImport } from './routes/s/route'
 import { Route as BAskRouteImport } from './routes/b/ask'
 import { Route as BSourcingRouteImport } from './routes/b/sourcing'
 import { Route as SAskRouteImport } from './routes/s/ask'
 import { Route as SAuditRouteImport } from './routes/s/audit'
+import { Route as SAuditPacksRouteImport } from './routes/s/audit-packs'
 import { Route as SBottlenecksRouteImport } from './routes/s/bottlenecks'
 import { Route as SCaptureRouteImport } from './routes/s/capture'
+import { Route as SCashRouteImport } from './routes/s/cash'
 import { Route as SChecklistRouteImport } from './routes/s/checklist'
 import { Route as SHomeRouteImport } from './routes/s/home'
+import { Route as SLevelRouteImport } from './routes/s/level'
 import { Route as SMaturityRouteImport } from './routes/s/maturity'
 import { Route as SSharingRouteImport } from './routes/s/sharing'
 import { Route as SShiftBriefRouteImport } from './routes/s/shift-brief'
+import { Route as SSkillsRouteImport } from './routes/s/skills'
 import { Route as BNcrIndexRouteImport } from './routes/b/ncr/index'
 import { Route as BNcrNcrIdRouteImport } from './routes/b/ncr/$ncrId'
 import { Route as BPassportsLotIdRouteImport } from './routes/b/passports/$lotId'
@@ -31,6 +36,8 @@ import { Route as BReportsIndexRouteImport } from './routes/b/reports/index'
 import { Route as BReportsReportIdRouteImport } from './routes/b/reports/$reportId'
 import { Route as BSuppliersIndexRouteImport } from './routes/b/suppliers/index'
 import { Route as BSuppliersTenantIdRouteImport } from './routes/b/suppliers/$tenantId'
+import { Route as CPlantsIndexRouteImport } from './routes/c/plants/index'
+import { Route as CPlantsSiteIdRouteImport } from './routes/c/plants/$siteId'
 import { Route as SCyclesCycleIdRouteImport } from './routes/s/cycles/$cycleId'
 import { Route as SEventsIndexRouteImport } from './routes/s/events/index'
 import { Route as SEventsEventIdRouteImport } from './routes/s/events/$eventId'
@@ -49,6 +56,11 @@ const IndexRoute = IndexRouteImport.update({
 const BRouteRoute = BRouteRouteImport.update({
   id: '/b',
   path: '/b',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CRouteRoute = CRouteRouteImport.update({
+  id: '/c',
+  path: '/c',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -81,6 +93,11 @@ const SAuditRoute = SAuditRouteImport.update({
   path: '/audit',
   getParentRoute: () => SRouteRoute,
 } as any)
+const SAuditPacksRoute = SAuditPacksRouteImport.update({
+  id: '/audit-packs',
+  path: '/audit-packs',
+  getParentRoute: () => SRouteRoute,
+} as any)
 const SBottlenecksRoute = SBottlenecksRouteImport.update({
   id: '/bottlenecks',
   path: '/bottlenecks',
@@ -91,6 +108,11 @@ const SCaptureRoute = SCaptureRouteImport.update({
   path: '/capture',
   getParentRoute: () => SRouteRoute,
 } as any)
+const SCashRoute = SCashRouteImport.update({
+  id: '/cash',
+  path: '/cash',
+  getParentRoute: () => SRouteRoute,
+} as any)
 const SChecklistRoute = SChecklistRouteImport.update({
   id: '/checklist',
   path: '/checklist',
@@ -99,6 +121,11 @@ const SChecklistRoute = SChecklistRouteImport.update({
 const SHomeRoute = SHomeRouteImport.update({
   id: '/home',
   path: '/home',
+  getParentRoute: () => SRouteRoute,
+} as any)
+const SLevelRoute = SLevelRouteImport.update({
+  id: '/level',
+  path: '/level',
   getParentRoute: () => SRouteRoute,
 } as any)
 const SMaturityRoute = SMaturityRouteImport.update({
@@ -114,6 +141,11 @@ const SSharingRoute = SSharingRouteImport.update({
 const SShiftBriefRoute = SShiftBriefRouteImport.update({
   id: '/shift-brief',
   path: '/shift-brief',
+  getParentRoute: () => SRouteRoute,
+} as any)
+const SSkillsRoute = SSkillsRouteImport.update({
+  id: '/skills',
+  path: '/skills',
   getParentRoute: () => SRouteRoute,
 } as any)
 const BNcrIndexRoute = BNcrIndexRouteImport.update({
@@ -150,6 +182,16 @@ const BSuppliersTenantIdRoute = BSuppliersTenantIdRouteImport.update({
   id: '/suppliers/$tenantId',
   path: '/suppliers/$tenantId',
   getParentRoute: () => BRouteRoute,
+} as any)
+const CPlantsIndexRoute = CPlantsIndexRouteImport.update({
+  id: '/plants/',
+  path: '/plants/',
+  getParentRoute: () => CRouteRoute,
+} as any)
+const CPlantsSiteIdRoute = CPlantsSiteIdRouteImport.update({
+  id: '/plants/$siteId',
+  path: '/plants/$siteId',
+  getParentRoute: () => CRouteRoute,
 } as any)
 const SCyclesCycleIdRoute = SCyclesCycleIdRouteImport.update({
   id: '/cycles/$cycleId',
@@ -200,23 +242,29 @@ const SReportsReportIdRoute = SReportsReportIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/b': typeof BRouteRouteWithChildren
+  '/c': typeof CRouteRouteWithChildren
   '/s': typeof SRouteRouteWithChildren
   '/login': typeof LoginRoute
   '/b/ask': typeof BAskRoute
   '/b/sourcing': typeof BSourcingRoute
   '/s/ask': typeof SAskRoute
   '/s/audit': typeof SAuditRoute
+  '/s/audit-packs': typeof SAuditPacksRoute
   '/s/bottlenecks': typeof SBottlenecksRoute
   '/s/capture': typeof SCaptureRoute
+  '/s/cash': typeof SCashRoute
   '/s/checklist': typeof SChecklistRoute
   '/s/home': typeof SHomeRoute
+  '/s/level': typeof SLevelRoute
   '/s/maturity': typeof SMaturityRoute
   '/s/sharing': typeof SSharingRoute
   '/s/shift-brief': typeof SShiftBriefRoute
+  '/s/skills': typeof SSkillsRoute
   '/b/ncr/$ncrId': typeof BNcrNcrIdRoute
   '/b/passports/$lotId': typeof BPassportsLotIdRoute
   '/b/reports/$reportId': typeof BReportsReportIdRoute
   '/b/suppliers/$tenantId': typeof BSuppliersTenantIdRoute
+  '/c/plants/$siteId': typeof CPlantsSiteIdRoute
   '/s/cycles/$cycleId': typeof SCyclesCycleIdRoute
   '/s/events/$eventId': typeof SEventsEventIdRoute
   '/s/lots/$lotId': typeof SLotsLotIdRoute
@@ -225,6 +273,7 @@ export interface FileRoutesByFullPath {
   '/b/ncr/': typeof BNcrIndexRoute
   '/b/reports/': typeof BReportsIndexRoute
   '/b/suppliers/': typeof BSuppliersIndexRoute
+  '/c/plants/': typeof CPlantsIndexRoute
   '/s/events/': typeof SEventsIndexRoute
   '/s/lots/': typeof SLotsIndexRoute
   '/s/ncr/': typeof SNcrIndexRoute
@@ -233,23 +282,29 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/b': typeof BRouteRouteWithChildren
+  '/c': typeof CRouteRouteWithChildren
   '/s': typeof SRouteRouteWithChildren
   '/login': typeof LoginRoute
   '/b/ask': typeof BAskRoute
   '/b/sourcing': typeof BSourcingRoute
   '/s/ask': typeof SAskRoute
   '/s/audit': typeof SAuditRoute
+  '/s/audit-packs': typeof SAuditPacksRoute
   '/s/bottlenecks': typeof SBottlenecksRoute
   '/s/capture': typeof SCaptureRoute
+  '/s/cash': typeof SCashRoute
   '/s/checklist': typeof SChecklistRoute
   '/s/home': typeof SHomeRoute
+  '/s/level': typeof SLevelRoute
   '/s/maturity': typeof SMaturityRoute
   '/s/sharing': typeof SSharingRoute
   '/s/shift-brief': typeof SShiftBriefRoute
+  '/s/skills': typeof SSkillsRoute
   '/b/ncr/$ncrId': typeof BNcrNcrIdRoute
   '/b/passports/$lotId': typeof BPassportsLotIdRoute
   '/b/reports/$reportId': typeof BReportsReportIdRoute
   '/b/suppliers/$tenantId': typeof BSuppliersTenantIdRoute
+  '/c/plants/$siteId': typeof CPlantsSiteIdRoute
   '/s/cycles/$cycleId': typeof SCyclesCycleIdRoute
   '/s/events/$eventId': typeof SEventsEventIdRoute
   '/s/lots/$lotId': typeof SLotsLotIdRoute
@@ -258,6 +313,7 @@ export interface FileRoutesByTo {
   '/b/ncr': typeof BNcrIndexRoute
   '/b/reports': typeof BReportsIndexRoute
   '/b/suppliers': typeof BSuppliersIndexRoute
+  '/c/plants': typeof CPlantsIndexRoute
   '/s/events': typeof SEventsIndexRoute
   '/s/lots': typeof SLotsIndexRoute
   '/s/ncr': typeof SNcrIndexRoute
@@ -267,23 +323,29 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/b': typeof BRouteRouteWithChildren
+  '/c': typeof CRouteRouteWithChildren
   '/s': typeof SRouteRouteWithChildren
   '/login': typeof LoginRoute
   '/b/ask': typeof BAskRoute
   '/b/sourcing': typeof BSourcingRoute
   '/s/ask': typeof SAskRoute
   '/s/audit': typeof SAuditRoute
+  '/s/audit-packs': typeof SAuditPacksRoute
   '/s/bottlenecks': typeof SBottlenecksRoute
   '/s/capture': typeof SCaptureRoute
+  '/s/cash': typeof SCashRoute
   '/s/checklist': typeof SChecklistRoute
   '/s/home': typeof SHomeRoute
+  '/s/level': typeof SLevelRoute
   '/s/maturity': typeof SMaturityRoute
   '/s/sharing': typeof SSharingRoute
   '/s/shift-brief': typeof SShiftBriefRoute
+  '/s/skills': typeof SSkillsRoute
   '/b/ncr/$ncrId': typeof BNcrNcrIdRoute
   '/b/passports/$lotId': typeof BPassportsLotIdRoute
   '/b/reports/$reportId': typeof BReportsReportIdRoute
   '/b/suppliers/$tenantId': typeof BSuppliersTenantIdRoute
+  '/c/plants/$siteId': typeof CPlantsSiteIdRoute
   '/s/cycles/$cycleId': typeof SCyclesCycleIdRoute
   '/s/events/$eventId': typeof SEventsEventIdRoute
   '/s/lots/$lotId': typeof SLotsLotIdRoute
@@ -292,6 +354,7 @@ export interface FileRoutesById {
   '/b/ncr/': typeof BNcrIndexRoute
   '/b/reports/': typeof BReportsIndexRoute
   '/b/suppliers/': typeof BSuppliersIndexRoute
+  '/c/plants/': typeof CPlantsIndexRoute
   '/s/events/': typeof SEventsIndexRoute
   '/s/lots/': typeof SLotsIndexRoute
   '/s/ncr/': typeof SNcrIndexRoute
@@ -302,23 +365,29 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/b'
+    | '/c'
     | '/s'
     | '/login'
     | '/b/ask'
     | '/b/sourcing'
     | '/s/ask'
     | '/s/audit'
+    | '/s/audit-packs'
     | '/s/bottlenecks'
     | '/s/capture'
+    | '/s/cash'
     | '/s/checklist'
     | '/s/home'
+    | '/s/level'
     | '/s/maturity'
     | '/s/sharing'
     | '/s/shift-brief'
+    | '/s/skills'
     | '/b/ncr/$ncrId'
     | '/b/passports/$lotId'
     | '/b/reports/$reportId'
     | '/b/suppliers/$tenantId'
+    | '/c/plants/$siteId'
     | '/s/cycles/$cycleId'
     | '/s/events/$eventId'
     | '/s/lots/$lotId'
@@ -327,6 +396,7 @@ export interface FileRouteTypes {
     | '/b/ncr/'
     | '/b/reports/'
     | '/b/suppliers/'
+    | '/c/plants/'
     | '/s/events/'
     | '/s/lots/'
     | '/s/ncr/'
@@ -335,23 +405,29 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/b'
+    | '/c'
     | '/s'
     | '/login'
     | '/b/ask'
     | '/b/sourcing'
     | '/s/ask'
     | '/s/audit'
+    | '/s/audit-packs'
     | '/s/bottlenecks'
     | '/s/capture'
+    | '/s/cash'
     | '/s/checklist'
     | '/s/home'
+    | '/s/level'
     | '/s/maturity'
     | '/s/sharing'
     | '/s/shift-brief'
+    | '/s/skills'
     | '/b/ncr/$ncrId'
     | '/b/passports/$lotId'
     | '/b/reports/$reportId'
     | '/b/suppliers/$tenantId'
+    | '/c/plants/$siteId'
     | '/s/cycles/$cycleId'
     | '/s/events/$eventId'
     | '/s/lots/$lotId'
@@ -360,6 +436,7 @@ export interface FileRouteTypes {
     | '/b/ncr'
     | '/b/reports'
     | '/b/suppliers'
+    | '/c/plants'
     | '/s/events'
     | '/s/lots'
     | '/s/ncr'
@@ -368,23 +445,29 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/b'
+    | '/c'
     | '/s'
     | '/login'
     | '/b/ask'
     | '/b/sourcing'
     | '/s/ask'
     | '/s/audit'
+    | '/s/audit-packs'
     | '/s/bottlenecks'
     | '/s/capture'
+    | '/s/cash'
     | '/s/checklist'
     | '/s/home'
+    | '/s/level'
     | '/s/maturity'
     | '/s/sharing'
     | '/s/shift-brief'
+    | '/s/skills'
     | '/b/ncr/$ncrId'
     | '/b/passports/$lotId'
     | '/b/reports/$reportId'
     | '/b/suppliers/$tenantId'
+    | '/c/plants/$siteId'
     | '/s/cycles/$cycleId'
     | '/s/events/$eventId'
     | '/s/lots/$lotId'
@@ -393,6 +476,7 @@ export interface FileRouteTypes {
     | '/b/ncr/'
     | '/b/reports/'
     | '/b/suppliers/'
+    | '/c/plants/'
     | '/s/events/'
     | '/s/lots/'
     | '/s/ncr/'
@@ -402,6 +486,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BRouteRoute: typeof BRouteRouteWithChildren
+  CRouteRoute: typeof CRouteRouteWithChildren
   SRouteRoute: typeof SRouteRouteWithChildren
   LoginRoute: typeof LoginRoute
 }
@@ -420,6 +505,13 @@ declare module '@tanstack/react-router' {
       path: '/b'
       fullPath: '/b'
       preLoaderRoute: typeof BRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/c': {
+      id: '/c'
+      path: '/c'
+      fullPath: '/c'
+      preLoaderRoute: typeof CRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login': {
@@ -464,6 +556,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SAuditRouteImport
       parentRoute: typeof SRouteRoute
     }
+    '/s/audit-packs': {
+      id: '/s/audit-packs'
+      path: '/audit-packs'
+      fullPath: '/s/audit-packs'
+      preLoaderRoute: typeof SAuditPacksRouteImport
+      parentRoute: typeof SRouteRoute
+    }
     '/s/bottlenecks': {
       id: '/s/bottlenecks'
       path: '/bottlenecks'
@@ -478,6 +577,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SCaptureRouteImport
       parentRoute: typeof SRouteRoute
     }
+    '/s/cash': {
+      id: '/s/cash'
+      path: '/cash'
+      fullPath: '/s/cash'
+      preLoaderRoute: typeof SCashRouteImport
+      parentRoute: typeof SRouteRoute
+    }
     '/s/checklist': {
       id: '/s/checklist'
       path: '/checklist'
@@ -490,6 +596,13 @@ declare module '@tanstack/react-router' {
       path: '/home'
       fullPath: '/s/home'
       preLoaderRoute: typeof SHomeRouteImport
+      parentRoute: typeof SRouteRoute
+    }
+    '/s/level': {
+      id: '/s/level'
+      path: '/level'
+      fullPath: '/s/level'
+      preLoaderRoute: typeof SLevelRouteImport
       parentRoute: typeof SRouteRoute
     }
     '/s/maturity': {
@@ -511,6 +624,13 @@ declare module '@tanstack/react-router' {
       path: '/shift-brief'
       fullPath: '/s/shift-brief'
       preLoaderRoute: typeof SShiftBriefRouteImport
+      parentRoute: typeof SRouteRoute
+    }
+    '/s/skills': {
+      id: '/s/skills'
+      path: '/skills'
+      fullPath: '/s/skills'
+      preLoaderRoute: typeof SSkillsRouteImport
       parentRoute: typeof SRouteRoute
     }
     '/b/ncr/': {
@@ -561,6 +681,20 @@ declare module '@tanstack/react-router' {
       fullPath: '/b/suppliers/$tenantId'
       preLoaderRoute: typeof BSuppliersTenantIdRouteImport
       parentRoute: typeof BRouteRoute
+    }
+    '/c/plants/': {
+      id: '/c/plants/'
+      path: '/plants'
+      fullPath: '/c/plants/'
+      preLoaderRoute: typeof CPlantsIndexRouteImport
+      parentRoute: typeof CRouteRoute
+    }
+    '/c/plants/$siteId': {
+      id: '/c/plants/$siteId'
+      path: '/plants/$siteId'
+      fullPath: '/c/plants/$siteId'
+      preLoaderRoute: typeof CPlantsSiteIdRouteImport
+      parentRoute: typeof CRouteRoute
     }
     '/s/cycles/$cycleId': {
       id: '/s/cycles/$cycleId'
@@ -655,16 +789,33 @@ const BRouteRouteChildren: BRouteRouteChildren = {
 const BRouteRouteWithChildren =
   BRouteRoute._addFileChildren(BRouteRouteChildren)
 
+interface CRouteRouteChildren {
+  CPlantsSiteIdRoute: typeof CPlantsSiteIdRoute
+  CPlantsIndexRoute: typeof CPlantsIndexRoute
+}
+
+const CRouteRouteChildren: CRouteRouteChildren = {
+  CPlantsSiteIdRoute: CPlantsSiteIdRoute,
+  CPlantsIndexRoute: CPlantsIndexRoute,
+}
+
+const CRouteRouteWithChildren =
+  CRouteRoute._addFileChildren(CRouteRouteChildren)
+
 interface SRouteRouteChildren {
   SAskRoute: typeof SAskRoute
   SAuditRoute: typeof SAuditRoute
+  SAuditPacksRoute: typeof SAuditPacksRoute
   SBottlenecksRoute: typeof SBottlenecksRoute
   SCaptureRoute: typeof SCaptureRoute
+  SCashRoute: typeof SCashRoute
   SChecklistRoute: typeof SChecklistRoute
   SHomeRoute: typeof SHomeRoute
+  SLevelRoute: typeof SLevelRoute
   SMaturityRoute: typeof SMaturityRoute
   SSharingRoute: typeof SSharingRoute
   SShiftBriefRoute: typeof SShiftBriefRoute
+  SSkillsRoute: typeof SSkillsRoute
   SCyclesCycleIdRoute: typeof SCyclesCycleIdRoute
   SEventsEventIdRoute: typeof SEventsEventIdRoute
   SLotsLotIdRoute: typeof SLotsLotIdRoute
@@ -679,13 +830,17 @@ interface SRouteRouteChildren {
 const SRouteRouteChildren: SRouteRouteChildren = {
   SAskRoute: SAskRoute,
   SAuditRoute: SAuditRoute,
+  SAuditPacksRoute: SAuditPacksRoute,
   SBottlenecksRoute: SBottlenecksRoute,
   SCaptureRoute: SCaptureRoute,
+  SCashRoute: SCashRoute,
   SChecklistRoute: SChecklistRoute,
   SHomeRoute: SHomeRoute,
+  SLevelRoute: SLevelRoute,
   SMaturityRoute: SMaturityRoute,
   SSharingRoute: SSharingRoute,
   SShiftBriefRoute: SShiftBriefRoute,
+  SSkillsRoute: SSkillsRoute,
   SCyclesCycleIdRoute: SCyclesCycleIdRoute,
   SEventsEventIdRoute: SEventsEventIdRoute,
   SLotsLotIdRoute: SLotsLotIdRoute,
@@ -703,6 +858,7 @@ const SRouteRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BRouteRoute: BRouteRouteWithChildren,
+  CRouteRoute: CRouteRouteWithChildren,
   SRouteRoute: SRouteRouteWithChildren,
   LoginRoute: LoginRoute,
 }

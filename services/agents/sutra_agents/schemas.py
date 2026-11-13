@@ -93,6 +93,8 @@ class AuditAction(StrEnum):
     cycle_open = "cycle.open"
     cycle_close = "cycle.close"
     buyer_view = "buyer.view"
+    skill_toggle = "skill.toggle"
+    referral_consent = "referral.consent"
 
 
 class AuditEntry(BaseModel):
@@ -107,6 +109,28 @@ class AuditEntry(BaseModel):
     at: AwareDatetime
     prevHash: constr(pattern=r"^[a-f0-9]{64}$")
     hash: constr(pattern=r"^[a-f0-9]{64}$")
+
+
+class Clause(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    ref: str
+    title: str
+    evidenceIds: list[ULID]
+    gap: str | None = None
+
+
+class AuditStandard(StrEnum):
+    zed = "zed"
+    iso9001 = "iso9001"
+    iatf16949 = "iatf16949"
+
+
+class Status1(StrEnum):
+    walking = "walking"
+    draft = "draft"
+    reviewed = "reviewed"
 
 
 class BottleneckFactor(StrEnum):
@@ -242,11 +266,11 @@ class MediaItem(BaseModel):
 
 
 class Dimension(StrEnum):
-    capture = "capture"
-    standardisation = "standardisation"
-    traceability = "traceability"
-    decision_use = "decision_use"
-    people_cadence = "people_cadence"
+    standard_work = "standard_work"
+    inspection_evidence = "inspection_evidence"
+    problem_solving = "problem_solving"
+    delivery_flow = "delivery_flow"
+    data_connectivity = "data_connectivity"
 
 
 class Drift(StrEnum):
@@ -279,7 +303,7 @@ class EightD(BaseModel):
     similarCases: list[str]
 
 
-class Status1(StrEnum):
+class Status2(StrEnum):
     draft = "draft"
     confirmed = "confirmed"
 
@@ -376,13 +400,13 @@ class PlanItem(BaseModel):
     done: bool
 
 
-class Status3(StrEnum):
+class Status4(StrEnum):
     open = "open"
     verifying = "verifying"
     closed = "closed"
 
 
-class Baseline(BaseModel):
+class Baseline1(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
@@ -413,8 +437,8 @@ class ImprovementCycle(BaseModel):
     openedAt: AwareDatetime
     dueAt: AwareDatetime
     fixAppliedAt: AwareDatetime | None = None
-    status: Status3
-    baseline: Baseline
+    status: Status4
+    baseline: Baseline1
     result: Result | None = None
     beforeEvidenceIds: list[ULID]
     verificationEvidenceIds: list[ULID]
@@ -447,12 +471,25 @@ class Invoice(BaseModel):
     paidAt: AwareDatetime | None = None
 
 
+class LeakKind(StrEnum):
+    material_receipt = "material_receipt"
+    first_off = "first_off"
+    in_process = "in_process"
+    problems = "problems"
+    handover = "handover"
+    final_inspection = "final_inspection"
+    invoice = "invoice"
+
+
 class Locale(StrEnum):
     en = "en"
-    ja = "ja"
-    vi = "vi"
+    mr = "mr"
     hi = "hi"
     ta = "ta"
+    gu = "gu"
+    kn = "kn"
+    ja = "ja"
+    vi = "vi"
     id = "id"
 
 
@@ -461,6 +498,9 @@ class LocalizedText(BaseModel):
         extra="forbid",
     )
     en: constr(min_length=1)
+    mr: constr(min_length=1) | None = None
+    gu: constr(min_length=1) | None = None
+    kn: constr(min_length=1) | None = None
     ja: constr(min_length=1) | None = None
     vi: constr(min_length=1) | None = None
     hi: constr(min_length=1) | None = None
@@ -493,6 +533,13 @@ class Lot(BaseModel):
     deliveredOnTime: bool | None = None
 
 
+class ModelTier(StrEnum):
+    flash_lite = "flash_lite"
+    flash = "flash"
+    pro = "pro"
+    none = "none"
+
+
 class ThreadItem(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
@@ -520,7 +567,7 @@ class NcrStatus(StrEnum):
     closed = "closed"
 
 
-class Status4(StrEnum):
+class Status5(StrEnum):
     building = "building"
     needs_fix = "needs_fix"
     ready = "ready"
@@ -547,12 +594,50 @@ class PassportRule(StrEnum):
     hash_unchanged = "hash_unchanged"
 
 
+class Zed(StrEnum):
+    none = "none"
+    bronze = "bronze"
+    silver = "silver"
+    gold = "gold"
+
+
+class State(StrEnum):
+    current = "current"
+    future = "future"
+
+
+class Status6(StrEnum):
+    ai_draft = "ai_draft"
+    coach_edited = "coach_edited"
+    approved = "approved"
+
+
+class Leak(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    kind: LeakKind
+    description: str
+    skill: str | None = None
+
+
+class ProcessStep(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    id: str
+    name: str
+    owner: str
+    checks: list[str]
+    leak: Leak | None = None
+
+
 class Period(StrEnum):
     daily = "daily"
     weekly = "weekly"
 
 
-class Status5(StrEnum):
+class Status7(StrEnum):
     draft = "draft"
     published = "published"
 
@@ -593,7 +678,7 @@ class QualityReport(BaseModel):
     period: Period
     periodStart: date
     periodEnd: date
-    status: Status5
+    status: Status7
     metrics: Metrics
     stageRows: list[StageRow]
     highlights: list[Claim]
@@ -643,7 +728,7 @@ class RecordCheckInput(BaseModel):
     evidence: list[EvidenceItem2] = Field(..., min_length=1)
 
 
-class State(StrEnum):
+class State1(StrEnum):
     accepted = "accepted"
     disputed = "disputed"
 
@@ -655,16 +740,64 @@ class ReviewScoreInput(BaseModel):
     assessmentId: ULID
     stageId: ULID
     dimension: Dimension
-    state: State
+    state: State1
     comment: constr(max_length=400) | None = None
 
 
+class Reward(StrEnum):
+    reduced_inspection = "reduced_inspection"
+    payment_terms = "payment_terms"
+    new_parts_rfq = "new_parts_rfq"
+    supplier_of_year = "supplier_of_year"
+
+
+class RewardRule(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    buyerTenantId: ULID
+    level: conint(ge=0, le=5)
+    reward: Reward
+    detail: str
+
+
 class Role1(StrEnum):
+    operator = "operator"
     supplier_owner = "supplier_owner"
     line_lead = "line_lead"
     supplier_quality = "supplier_quality"
     buyer_quality = "buyer_quality"
     buyer_procurement = "buyer_procurement"
+    sutra_coach = "sutra_coach"
+
+
+class ZedAtLeast(StrEnum):
+    none = "none"
+    bronze = "bronze"
+    silver = "silver"
+    gold = "gold"
+
+
+class Requires(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    maxTurnoverCrore: float | None = None
+    zedAtLeast: ZedAtLeast | None = None
+    womenOwned: bool | None = None
+
+
+class Scheme(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    id: str
+    name: str
+    body: str
+    benefit: str
+    requires: Requires
+    url: str
+    verifiedOn: date
 
 
 class ScoreKey(BaseModel):
@@ -746,6 +879,28 @@ class Site(BaseModel):
     siteIndex: confloat(ge=0.0, le=5.0)
 
 
+class Unit(StrEnum):
+    percent = "percent"
+    hours = "hours"
+    count = "count"
+
+
+class SkillKey(StrEnum):
+    gauge_reader = "gauge_reader"
+    sheet_digitiser = "sheet_digitiser"
+    voice_to_event = "voice_to_event"
+    check_plan = "check_plan"
+    mtc_checker = "mtc_checker"
+    report_drafter = "report_drafter"
+    shift_brief = "shift_brief"
+    drift_explainer = "drift_explainer"
+    capa_drafter = "capa_drafter"
+    audit_mapper = "audit_mapper"
+    invoice_matcher = "invoice_matcher"
+    ask_evidence = "ask_evidence"
+    scheme_finder = "scheme_finder"
+
+
 class SlotStatus(StrEnum):
     done = "done"
     out_of_limit = "out_of_limit"
@@ -787,6 +942,12 @@ class StageScore(BaseModel):
     comment: str | None = None
 
 
+class StorageTier(StrEnum):
+    t1_lite = "t1_lite"
+    t2_core = "t2_core"
+    t3_connected = "t3_connected"
+
+
 class SupplierScorecard(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
@@ -821,6 +982,7 @@ class Country(StrEnum):
 class TenantKind(StrEnum):
     buyer = "buyer"
     supplier = "supplier"
+    sutra = "sutra"
 
 
 class Tier(StrEnum):
@@ -861,6 +1023,45 @@ class AskAnswer(BaseModel):
     claims: list[Claim]
     searched: conint(ge=-9007199254740991, le=9007199254740991)
     source: Source
+
+
+class AuditPack(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    id: ULID
+    siteId: ULID
+    standard: AuditStandard
+    builtAt: AwareDatetime
+    clauses: list[Clause]
+
+
+class DimensionModel(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    dimension: Dimension
+    level: conint(ge=0, le=5)
+    rationale: constr(max_length=300)
+    evidenceIds: list[ULID]
+    nextGap: constr(max_length=200)
+
+
+class Baseline(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    id: ULID
+    siteId: ULID
+    coachId: ULID
+    startedAt: AwareDatetime
+    status: Status1
+    questionsAnswered: conint(ge=0, le=25)
+    walkMedia: conint(ge=0, le=9007199254740991)
+    recordDays: conint(ge=0, le=9007199254740991)
+    dimensions: list[DimensionModel]
+    secondAssessorLevel: conint(ge=0, le=5) | None = None
+    reviewedAt: AwareDatetime | None = None
 
 
 class Bottleneck(BaseModel):
@@ -960,7 +1161,7 @@ class Event(BaseModel):
     summaryJa: constr(max_length=400) | None = None
     locale: Locale
     evidenceIds: list[ULID]
-    status: Status1
+    status: Status2
     createdBy: ULID
     createdAt: AwareDatetime
     confirmedAt: AwareDatetime | None = None
@@ -972,7 +1173,7 @@ class EventFilters(BaseModel):
     )
     stage: ULID | None = None
     type: EventType | None = None
-    status: Status1 | None = None
+    status: Status2 | None = None
     sort: Sort
 
 
@@ -1033,6 +1234,62 @@ class PassportCheck(BaseModel):
     explanation: str | None = None
 
 
+class PlantProfile(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    siteId: ULID
+    tenantId: ULID
+    udyamNo: str
+    employees: conint(le=9007199254740991, gt=0)
+    turnoverCrore: confloat(ge=0.0)
+    sector: str
+    cluster: str
+    tier: StorageTier
+    coachId: ULID | None = None
+    zed: Zed
+    isoCertified: bool
+    womenOwned: bool
+
+
+class PlantSkill(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    siteId: ULID
+    skill: SkillKey
+    enabled: bool
+    enabledAt: AwareDatetime | None = None
+    measured: float | None = None
+    runs30d: conint(ge=0, le=9007199254740991)
+
+
+class ProcessMap(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    id: ULID
+    siteId: ULID
+    state: State
+    status: Status6
+    steps: list[ProcessStep]
+    updatedAt: AwareDatetime
+    approvedBy: ULID | None = None
+
+
+class Skill(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    key: SkillKey
+    leak: LeakKind | None = None
+    tier: ModelTier
+    metric: str
+    target: float
+    unit: Unit
+    unlocks: conint(ge=0, le=5)
+
+
 class Tenant(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
@@ -1055,7 +1312,7 @@ class Passport(BaseModel):
     )
     lotId: ULID
     version: conint(ge=1, le=9007199254740991)
-    status: Status4
+    status: Status5
     checks: list[PassportCheck]
     overall: Overall
     sealedHash: constr(pattern=r"^[a-f0-9]{64}$") | None = None

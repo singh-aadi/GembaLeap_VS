@@ -1,4 +1,4 @@
-import { EventFilters } from '@gembaleap/schemas'
+import { EventFilters } from '@sutraos/schemas'
 import { createFileRoute } from '@tanstack/react-router'
 import { EventsPage } from '@/features/events/components/events-page'
 import { eventListQuery } from '@/features/events/queries'

@@ -8,7 +8,7 @@ COPY packages/schemas/package.json packages/schemas/
 COPY packages/seed/package.json packages/seed/
 RUN pnpm install --frozen-lockfile
 COPY . .
-RUN pnpm --filter @gembaleap/web build && pnpm --filter @gembaleap/web deploy --legacy --prod /out
+RUN pnpm --filter @sutraos/web build && pnpm --filter @sutraos/web deploy --legacy --prod /out
 
 FROM node:22-slim
 WORKDIR /app

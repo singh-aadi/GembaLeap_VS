@@ -1,4 +1,4 @@
-import type { EventType } from '@gembaleap/schemas'
+import type { EventType } from '@sutraos/schemas'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { useNavigate } from '@tanstack/react-router'
 import { useServerFn } from '@tanstack/react-start'

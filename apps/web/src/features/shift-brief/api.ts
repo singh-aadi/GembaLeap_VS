@@ -1,4 +1,4 @@
-import { ShiftBrief, SUPPLIER_ROLES, type Claim } from '@gembaleap/schemas'
+import { ShiftBrief, SUPPLIER_ROLES, type Claim } from '@sutraos/schemas'
 import { createServerFn } from '@tanstack/react-start'
 import { checklistState } from '@/features/checklist/checklist.server'
 import { agentsConfigured, callAgent } from '@/lib/agents.server'

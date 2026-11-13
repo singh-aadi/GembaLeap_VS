@@ -1,4 +1,4 @@
-import type { Level } from '@gembaleap/schemas'
+import type { Level } from '@sutraos/schemas'
 import { cn } from '@/lib/cn'
 import { useT } from '@/lib/i18n'
 

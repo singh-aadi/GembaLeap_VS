@@ -1,4 +1,4 @@
-from gembaleap_agents.canonical import GENESIS_HASH, canonical_json, chain_hash, sha256_hex
+from sutra_agents.canonical import GENESIS_HASH, canonical_json, chain_hash, sha256_hex
 
 
 def test_matches_typescript_fixture(fixture):

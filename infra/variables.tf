@@ -6,7 +6,7 @@ variable "project" {
 variable "region" {
   description = "Region for Cloud Run, Firestore, storage and BigQuery."
   type        = string
-  default     = "asia-northeast1"
+  default     = "asia-south1"
 }
 
 variable "web_image" {
@@ -24,6 +24,11 @@ variable "gemini_flash_model" {
   type        = string
 }
 
+variable "gemini_flash_lite_model" {
+  description = "Model id for Flash-Lite micro-skills (gauge reader, shift brief, invoice matcher)."
+  type        = string
+}
+
 variable "gemini_pro_model" {
   description = "Model id for Pro-class agents."
   type        = string
@@ -33,4 +38,10 @@ variable "min_instances" {
   description = "Minimum Cloud Run instances. 1 during demos to avoid cold starts."
   type        = number
   default     = 0
+}
+
+variable "backup_region" {
+  description = "Region for backups (data residency in India)."
+  type        = string
+  default     = "asia-south2"
 }

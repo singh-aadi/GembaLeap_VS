@@ -23,8 +23,7 @@ export function SideNav({
         <Brand className="text-base" />
         <p className="mt-4 truncate text-sm font-medium">{session.tenant?.name}</p>
         <p className="text-xs text-on-navy-muted">
-          {t(side === 'supplier' ? 'shell.supplierWorkspace' : 'shell.buyerWorkspace')} ·{' '}
-          {session.tenant?.city}
+          {t(`shell.workspace.${side}`)} · {session.tenant?.city}
         </p>
       </div>
       <nav aria-label={t('shell.mainNav')} className="flex-1 overflow-y-auto px-3 py-4">

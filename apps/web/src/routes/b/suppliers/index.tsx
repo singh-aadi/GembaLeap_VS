@@ -1,4 +1,4 @@
-import { HeatmapFilters } from '@gembaleap/schemas'
+import { HeatmapFilters } from '@sutraos/schemas'
 import { createFileRoute } from '@tanstack/react-router'
 import { HeatmapPage } from '@/features/buyer/components/heatmap-page'
 import { heatmapQuery } from '@/features/buyer/queries'

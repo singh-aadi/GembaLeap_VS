@@ -1,4 +1,4 @@
-import type { Passport, PassportCheck } from '@gembaleap/schemas'
+import type { Passport, PassportCheck } from '@sutraos/schemas'
 
 /**
  * Deterministic passport rules. The model only extracts values from documents;

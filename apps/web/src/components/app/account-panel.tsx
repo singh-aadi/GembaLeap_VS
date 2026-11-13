@@ -18,9 +18,7 @@ export function AccountPanel({ side, session }: { side: Side; session: ShellSess
           <dd className="text-muted">{session.user.title}</dd>
         </div>
         <div>
-          <dt className="text-xs text-muted">
-            {t(side === 'supplier' ? 'shell.supplierWorkspace' : 'shell.buyerWorkspace')}
-          </dt>
+          <dt className="text-xs text-muted">{t(`shell.workspace.${side}`)}</dt>
           <dd className="font-medium">{session.tenant?.name}</dd>
           <dd className="text-muted">{session.tenant?.city}</dd>
         </div>

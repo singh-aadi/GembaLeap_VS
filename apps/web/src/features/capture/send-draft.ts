@@ -1,4 +1,4 @@
-import type { CreateEventDraftInput } from '@gembaleap/schemas'
+import type { CreateEventDraftInput } from '@sutraos/schemas'
 import type { OutboxItem } from '@/lib/outbox'
 
 const EXT = { photo: 'jpg', audio: 'webm' } as const

@@ -1,4 +1,4 @@
-import { Dimension } from '@gembaleap/schemas'
+import { Dimension } from '@sutraos/schemas'
 import { LevelChip } from '@/components/app/ladder-bar'
 import { Card } from '@/components/ui/card'
 import { Table, Td, Th } from '@/components/ui/table'

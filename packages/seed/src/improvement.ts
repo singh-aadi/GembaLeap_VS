@@ -7,7 +7,7 @@ import {
   type ImprovementCycle,
   type ShiftBrief,
   type StageScore,
-} from '@gembaleap/schemas'
+} from '@sutraos/schemas'
 import { JST } from './clock'
 import type { SeedContext } from './context'
 import { EVENT_IDS } from './events'
@@ -64,59 +64,83 @@ export function buildImprovement(ctx: SeedContext) {
   const rows: Row[] = [
     [
       ST.blanking,
-      { capture: 2, standardisation: 2, traceability: 2, decision_use: 1, people_cadence: 2 },
       {
-        capture: 'Coil changes and width checks are recorded on the phone with photos.',
-        standardisation: 'Width and coil checks use fixed codes from WI-BL-01/02.',
-        traceability: 'Coil heat number is scanned at change and linked to the blank batch.',
-        decision_use: 'Records are kept but not reviewed when planning coil orders.',
-        people_cadence: 'Shift lead reviews the check list at handover.',
+        inspection_evidence: 2,
+        standard_work: 2,
+        data_connectivity: 2,
+        problem_solving: 1,
+        delivery_flow: 2,
+      },
+      {
+        inspection_evidence: 'Coil changes and width checks are recorded on the phone with photos.',
+        standard_work: 'Width and coil checks use fixed codes from WI-BL-01/02.',
+        data_connectivity: 'Coil heat number is scanned at change and linked to the blank batch.',
+        problem_solving: 'Records are kept but not reviewed when planning coil orders.',
+        delivery_flow: 'Shift lead reviews the check list at handover.',
       },
     ],
     [
       ST.press2,
-      { capture: 2, standardisation: 2, traceability: 1, decision_use: 1, people_cadence: 2 },
       {
-        capture: 'Defects and downtime are captured by voice and photo in Vietnamese.',
-        standardisation: 'Events carry standard defect and downtime codes.',
-        traceability:
+        inspection_evidence: 2,
+        standard_work: 2,
+        data_connectivity: 1,
+        problem_solving: 1,
+        delivery_flow: 2,
+      },
+      {
+        inspection_evidence: 'Defects and downtime are captured by voice and photo in Vietnamese.',
+        standard_work: 'Events carry standard defect and downtime codes.',
+        data_connectivity:
           'Press lots are not yet linked to the coil heat number; link is on the paper traveller.',
-        decision_use:
+        problem_solving:
           'Die change and pitch losses are logged but not used to schedule die maintenance.',
-        people_cadence: 'Daily 10-minute stand-up uses the shift brief.',
+        delivery_flow: 'Daily 10-minute stand-up uses the shift brief.',
       },
     ],
     [
       ST.weld,
-      { capture: 2, standardisation: 2, traceability: 2, decision_use: 2, people_cadence: 2 },
       {
-        capture: 'Peel tests are photographed with the reading.',
-        standardisation: 'Peel test and tip dressing follow WI-SW-01/02 codes.',
-        traceability: 'Weld batches are linked to press lots on the traveller scan.',
-        decision_use: 'Tip dressing interval was changed from the peel history.',
-        people_cadence: 'Weekly weld review with the quality lead.',
+        inspection_evidence: 2,
+        standard_work: 2,
+        data_connectivity: 2,
+        problem_solving: 2,
+        delivery_flow: 2,
+      },
+      {
+        inspection_evidence: 'Peel tests are photographed with the reading.',
+        standard_work: 'Peel test and tip dressing follow WI-SW-01/02 codes.',
+        data_connectivity: 'Weld batches are linked to press lots on the traveller scan.',
+        problem_solving: 'Tip dressing interval was changed from the peel history.',
+        delivery_flow: 'Weekly weld review with the quality lead.',
       },
     ],
     [
       ST.finalSato,
-      { capture: 3, standardisation: 2, traceability: 3, decision_use: 2, people_cadence: 2 },
       {
-        capture: 'CMM reports and packing photos are attached to every lot.',
-        standardisation: 'Inspection uses the customer control plan codes.',
-        traceability:
+        inspection_evidence: 3,
+        standard_work: 2,
+        data_connectivity: 3,
+        problem_solving: 2,
+        delivery_flow: 2,
+      },
+      {
+        inspection_evidence: 'CMM reports and packing photos are attached to every lot.',
+        standard_work: 'Inspection uses the customer control plan codes.',
+        data_connectivity:
           'Lot, CMM report and certificate are linked in the lot passport and shared with the customer.',
-        decision_use: 'First-time-right rate is reviewed monthly.',
-        people_cadence: 'Inspector rota and training records are kept.',
+        problem_solving: 'First-time-right rate is reviewed monthly.',
+        delivery_flow: 'Inspector rota and training records are kept.',
       },
     ],
   ]
 
   const evidenceFor: Record<Dimension, string[]> = {
-    capture: [EVENT_IDS.pitchD4, paperTraveller],
-    standardisation: [checkSheet],
-    traceability: [paperTraveller, cmmReport],
-    decision_use: [excelLog],
-    people_cadence: [lineChat],
+    inspection_evidence: [EVENT_IDS.pitchD4, paperTraveller],
+    standard_work: [checkSheet],
+    data_connectivity: [paperTraveller, cmmReport],
+    problem_solving: [excelLog],
+    delivery_flow: [lineChat],
   }
 
   const scores: StageScore[] = rows.flatMap(([stageId, levels, rationale]) =>
@@ -127,19 +151,19 @@ export function buildImprovement(ctx: SeedContext) {
       level: levels[dimension],
       rationale: rationale[dimension],
       evidenceIds:
-        stageId === ST.finalSato && dimension === 'traceability'
+        stageId === ST.finalSato && dimension === 'data_connectivity'
           ? [cmmReport, passportExample]
-          : stageId === ST.weld && dimension === 'decision_use'
+          : stageId === ST.weld && dimension === 'problem_solving'
             ? [weldChart]
             : evidenceFor[dimension],
       state:
-        stageId === ST.press2 && dimension === 'decision_use'
+        stageId === ST.press2 && dimension === 'problem_solving'
           ? 'disputed'
           : stageId === ST.press2 || stageId === ST.blanking
             ? 'accepted'
             : 'draft',
       comment:
-        stageId === ST.press2 && dimension === 'decision_use'
+        stageId === ST.press2 && dimension === 'problem_solving'
           ? 'We moved die D-114 maintenance forward after the pitch events in September. Attaching the maintenance plan.'
           : undefined,
     })),

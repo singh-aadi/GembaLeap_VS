@@ -1,4 +1,4 @@
-import { SourcingFilters } from '@gembaleap/schemas'
+import { SourcingFilters } from '@sutraos/schemas'
 import { createFileRoute } from '@tanstack/react-router'
 import { SourcingPage } from '@/features/buyer/components/sourcing-page'
 import { sourcingQuery } from '@/features/buyer/queries'

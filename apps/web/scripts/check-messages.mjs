@@ -26,7 +26,17 @@ const LINE_STAFF = [
   'slot',
   'today',
 ]
-const REQUIRED = { ja: 'all', vi: LINE_STAFF, hi: LINE_STAFF, ta: LINE_STAFF, id: LINE_STAFF }
+/** India launch: Marathi, Hindi and Tamil must cover line screens now; Gujarati and Kannada are in translation. */
+const REQUIRED = {
+  mr: LINE_STAFF,
+  hi: LINE_STAFF,
+  ta: LINE_STAFF,
+  gu: [],
+  kn: [],
+  ja: [],
+  vi: [],
+  id: [],
+}
 
 const en = load('en')
 const args = (message) => new Set([...message.matchAll(/\{\s*([a-zA-Z0-9_]+)/g)].map((m) => m[1]))

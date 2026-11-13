@@ -2,16 +2,18 @@
 
 from typing import Any, Literal
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Query, Request
+from fastapi.responses import PlainTextResponse
 from pydantic import BaseModel, Field
 
-from . import rules, scoring
+from . import channels, levels, payments, rules, scoring
 from .agents import specialists
-from .config import ModelNotConfiguredError
+from .config import ModelNotConfiguredError, settings
+from .escalation import choose_tier
 from .runtime import AgentOutputError, run_json
 from .schemas import AskAnswer, EightD, Event, ShiftBrief
 
-app = FastAPI(title="GembaLeap agents", version="0.1.0")
+app = FastAPI(title="SutraOS agents", version="0.1.0")
 
 
 class TenantRequest(BaseModel):
@@ -179,3 +181,114 @@ async def report_draft(body: AgentRequest) -> ReportDraft:
 @app.post("/agents/ask", response_model=AskAnswer)
 async def ask(body: AgentRequest) -> AskAnswer:
     return await _run(specialists.ask, body, AskAnswer)
+
+
+class LevelRequest(BaseModel):
+    stageLevels: dict[str, int]
+    criticalStages: list[str]
+    streakDays: int = Field(ge=0)
+    adherence: float = Field(ge=0, le=1)
+    buyerVerified: bool
+
+
+class LevelOut(BaseModel):
+    level: int
+    next: int
+    gaps: list[str]
+
+
+@app.post("/rules/level", response_model=LevelOut)
+def level(body: LevelRequest) -> LevelOut:
+    """Sutra level and what blocks the next one. Pure code, no model."""
+    current = levels.plant_level(body.stageLevels, body.criticalStages)
+    nxt = min(5, current + 1)
+    gaps = levels.promotion_gaps(
+        nxt, levels.Streak(body.streakDays, body.adherence, body.buyerVerified)
+    )
+    return LevelOut(level=current, next=nxt, gaps=gaps)
+
+
+class InvoiceIn(BaseModel):
+    issuedAt: str
+    paidAt: str | None = None
+    now: str
+    termDays: int = 45
+    poQty: float
+    poPrice: float
+    grnQty: float
+    invoiceQty: float
+    invoicePrice: float
+
+
+class InvoiceOut(BaseModel):
+    day: int
+    limit: int
+    status: str
+    matched: bool
+    issues: list[str]
+
+
+@app.post("/rules/invoice", response_model=InvoiceOut)
+def invoice(body: InvoiceIn) -> InvoiceOut:
+    """Payment clock against the 45-day MSMED limit plus PO/GRN/invoice three-way match."""
+    day, limit, status = payments.payment_clock(body.issuedAt, body.paidAt, body.now, body.termDays)
+    issues = payments.invoice_match(
+        body.poQty, body.poPrice, body.grnQty, body.invoiceQty, body.invoicePrice
+    )
+    return InvoiceOut(day=day, limit=limit, status=status, matched=not issues, issues=issues)
+
+
+class Tiered(BaseModel):
+    tier: str
+
+
+@app.get("/rules/tier", response_model=Tiered)
+def tier(base: str, confidence: float = 1.0, input_chars: int = 0) -> Tiered:
+    if base not in ("flash_lite", "flash", "pro", "none"):
+        raise HTTPException(status_code=422, detail="unknown tier")
+    return Tiered(tier=choose_tier(base, confidence, input_chars))  # type: ignore[arg-type]
+
+
+class GaugeReading(BaseModel):
+    value: float | None
+    unit: str
+    confidence: float
+    reason: str
+
+
+@app.post("/agents/gauge/read", response_model=GaugeReading)
+async def gauge_read(body: AgentRequest) -> GaugeReading:
+    return await _run(specialists.gauge_reader, body, GaugeReading)
+
+
+@app.post("/agents/baseline/draft", response_model=dict[str, Any])
+async def baseline_draft(body: AgentRequest) -> dict[str, Any]:
+    return (await _run(specialists.baseline, body, _Loose)).model_dump()
+
+
+@app.post("/agents/planner/check-plan", response_model=dict[str, Any])
+async def check_plan(body: AgentRequest) -> dict[str, Any]:
+    return (await _run(specialists.planner, body, _Loose)).model_dump()
+
+
+class _Loose(BaseModel):
+    model_config = {"extra": "allow"}
+
+
+@app.get("/channels/whatsapp", response_class=PlainTextResponse)
+def whatsapp_verify(
+    mode: str = Query(alias="hub.mode"),
+    token: str = Query(alias="hub.verify_token"),
+    challenge: str = Query(alias="hub.challenge"),
+) -> str:
+    expected = settings().whatsapp_verify_token
+    if mode != "subscribe" or not expected or token != expected:
+        raise HTTPException(status_code=403, detail="verification failed")
+    return challenge
+
+
+@app.post("/channels/whatsapp")
+async def whatsapp_inbound(request: Request) -> dict[str, Any]:
+    """Accepts WhatsApp messages and routes each one. Replies are sent once a provider is wired."""
+    messages = channels.parse(await request.json())
+    return {"routed": [{"sender": m.sender, "route": channels.route(m)} for m in messages]}

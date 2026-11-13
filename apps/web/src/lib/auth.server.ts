@@ -1,4 +1,4 @@
-import type { ConsentScope, Role, User } from '@gembaleap/schemas'
+import type { ConsentScope, Role, User } from '@sutraos/schemas'
 import { AppError } from './app-error'
 import { now, type Db } from './store.server'
 

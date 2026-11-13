@@ -15,7 +15,7 @@ test('line lead gets bottom tabs and no sideways scroll', async ({ page }) => {
 })
 
 test('procurement sees suppliers but not NCR rooms', async ({ page }) => {
-  await signInAs(page, 'Kaori Yamamoto')
+  await signInAs(page, 'Priya Deshpande')
   await visit(page, '/b/ncr')
   await expect(page).toHaveURL(/\/b\/suppliers/)
 })

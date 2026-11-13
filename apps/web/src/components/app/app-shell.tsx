@@ -1,4 +1,4 @@
-import type { Role } from '@gembaleap/schemas'
+import type { Role } from '@sutraos/schemas'
 import type { ReactNode } from 'react'
 import { mobileTabsFor, navFor } from '@/lib/nav'
 import type { Side } from '@/lib/roles'

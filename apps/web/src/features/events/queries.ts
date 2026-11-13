@@ -1,4 +1,4 @@
-import type { EventFilters } from '@gembaleap/schemas'
+import type { EventFilters } from '@sutraos/schemas'
 import { queryOptions } from '@tanstack/react-query'
 import { getEvent, listEvents } from './api'
 
