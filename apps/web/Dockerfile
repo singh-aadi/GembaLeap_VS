@@ -8,11 +8,10 @@ COPY packages/schemas/package.json packages/schemas/
 COPY packages/seed/package.json packages/seed/
 RUN pnpm install --frozen-lockfile
 COPY . .
-RUN pnpm --filter @sutraos/web build && pnpm --filter @sutraos/web deploy --legacy --prod /out
+RUN pnpm --filter @sutraos/web build
 
 FROM node:22-slim
 WORKDIR /app
-COPY --from=build /out ./
-COPY --from=build /repo/apps/web/dist ./dist
+COPY --from=build /repo/apps/web/.output ./.output
 ENV NODE_ENV=production PORT=8080
-CMD ["node_modules/.bin/srvx", "--prod", "-s", "../client", "dist/server/server.js"]
+CMD ["node", ".output/server/index.mjs"]

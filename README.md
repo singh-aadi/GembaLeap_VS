@@ -67,3 +67,7 @@ pnpm i18n:check
 pnpm e2e
 cd services/agents && uv run pytest
 ```
+
+## Deploy
+
+The web app builds with the Nitro Vite plugin, so it deploys to Vercel as well as Cloud Run (`infra/`).

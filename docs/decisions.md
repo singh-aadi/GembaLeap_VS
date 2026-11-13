@@ -76,13 +76,13 @@ The seed runs on a fixed time: 11:20 at the Japanese plant on the current JST da
 
 ## D12 · Libraries beyond PRD §4
 
-| Library                                                          | Why                                             |
-| ---------------------------------------------------------------- | ----------------------------------------------- |
-| radix-ui, class-variance-authority, clsx, tailwind-merge, sonner | What shadcn/ui primitives are built on          |
-| @tanstack/react-router-ssr-query                                 | Query cache hydration with Start SSR            |
-| srvx                                                             | Serves the Start build on Node / Cloud Run      |
-| python-ulid                                                      | ULID type used by the generated Pydantic models |
-| prettier, typescript-eslint, TanStack ESLint plugins, tsx        | Formatting, linting, running TS scripts         |
+| Library                                                          | Why                                              |
+| ---------------------------------------------------------------- | ------------------------------------------------ |
+| radix-ui, class-variance-authority, clsx, tailwind-merge, sonner | What shadcn/ui primitives are built on           |
+| @tanstack/react-router-ssr-query                                 | Query cache hydration with Start SSR             |
+| nitro                                                            | Builds the server for Node, Cloud Run and Vercel |
+| python-ulid                                                      | ULID type used by the generated Pydantic models  |
+| prettier, typescript-eslint, TanStack ESLint plugins, tsx        | Formatting, linting, running TS scripts          |
 
 Not added yet: Testing Library (no component tests so far) and a service worker. The offline outbox works without one; app-shell caching is M1.
 
